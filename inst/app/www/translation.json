@@ -1,0 +1,85 @@
+{
+  "cultural_date_format": "%d-%m-%Y",
+  "languages": ["en", "nb"],
+  "translation": [
+    {
+      "en": "Calculate the expected development of salmon lice per cage",
+      "nb": "Regn ut forventet utvikling av lakselus per merd"},
+    {
+      "en": "Infectious Pressure",
+      "nb": "Smittepress"
+    },
+    {
+      "en": "Enter the 5-digit locality number and get infection pressure automatically",
+      "nb": "Skriv inn 5-sifret lokalitetsnummer og få smittepress automatisk"
+    },
+    {
+      "en": "Select infection pressure manually",
+      "nb": "Velg smittepress manuelt"
+    },
+    {
+      "en": "Start the calculation from",
+      "nb": "Start beregningen fra"
+    },
+    {
+      "en": "Locality Number",
+      "nb": "Lokalitetsnummer "
+    },
+    {
+      "en": "Start Year",
+      "nb": "Startår"
+    },
+    {
+      "en": "Start Week",
+      "nb": "Startuke"
+    },
+    {
+      "en": "Select Value",
+      "nb": "Velg Verdi"
+    },
+    {
+      "en": "Treatment strategy against lice on your farm",
+      "nb": "Behandlingsstrategi mot lus på ditt anlegg"
+    },
+    {
+      "en": "The entire locality",
+      "nb": "Hele lokaliteten"
+    },
+    {
+      "en": "Many Times",
+      "nb": "Merdvis"
+    },
+    {
+      "en": "Additional data for your farm",
+      "nb": "Merddata for ditt anlegg"
+    },
+    {
+      "en": "Upload table in csv format (download example.csv)",
+      "nb": "Last opp tabell i csv-format (last ned eksempel.csv)"
+    },
+    {
+      "en": "Enter data manually",
+      "nb": "Legg inn data manuelt"
+    },
+    {
+      "en": "Calculate Development",
+      "nb": "Beregn utvikling"
+    },
+    {
+      "en": "Choose File",
+      "nb": "Velg fil"
+    },
+    {
+      "en": "Browse",
+      "nb": "Bla"
+    },
+    {
+      "en": "About the calculator",
+      "nb": "Om kalkulatoren"
+    },
+    {
+      "en": "Lice Calculator",
+      "nb": "Lusekalkulator"
+    }
+  ]
+}

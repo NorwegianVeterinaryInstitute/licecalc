@@ -1,0 +1,18 @@
+.header-container {
+    background: #003344;
+    padding: 1rem;
+    border-radius: 0.375rem;
+    margin-bottom: 0.25rem;
+}
+.header-left {
+    max-height: 50px;
+    max-width: 280px; 
+    color: white;
+}
+.header-right {
+    color: white;
+}
+.header-middle {
+    font-size: xx-large;
+    color: white;
+}

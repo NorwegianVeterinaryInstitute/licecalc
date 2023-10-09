@@ -1,0 +1,17 @@
+---
+title: "Documentation"
+date: "19 january 2017"
+output: html_document
+---
+
+
+## Map of weekly infection pressure
+
+The lice calculator is based on forecasts from a statistical model that has been developed on the basis of detailed cage data from entire stocks of fish in the period 2012 – 2014, from 25 locations along the coast from Rogaland to Sør - Trøndelag. This data includes lice counts at fish level, stock of cleaning fish, lice treatments and temperature. Only data covering the period 1 May to 31 December is used in the models, because it is this period that is associated with the biggest head lice problems.
+
+The model calculated the expected development (red curve) of the sum of the categories of sexually mature female lice and other mobile stages of lice at cage level, one, two and three weeks into the future. In addition, the interval (50% confidence interval) that is expected to comprise half of future observations is calculated (black curves).
+
+The calculations are based on information about the occurrence of lice at the last count in a given cage and whether or not cleaner fish is used, where such use is defined as at least 1% mixing. In addition, calculations of external infection pressure for the current location are automatically collected, which are included as part of the calculation basis in the lice calculator. This infection pressure corresponds to servers that appear in the application [Lusekart](/lusekart).
+
+In addition to calculating lice occurrences three weeks ahead, the lice calculator calculates the probability that there will be more than 0.5 sexually mature female lice per fish in the cage. This is the applicable locality - wise maximum limit for salmon lice. These numbers appear in the top left corner of a given cage forecast, and are calculated given that the louse numbers for the mobile stages follow the expected development (red curve), or the numbers that represent the lower or upper 50% interval (black curves).
+The lice calculator is a product of the project "Population model for salmon lice" (FHF project 900970).
