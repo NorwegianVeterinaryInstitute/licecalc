@@ -6,7 +6,7 @@
 \usage{
 run_app(
   onStart = NULL,
-  options = list(launch.browser = TRUE),
+  options = list(launch.browser = FALSE),
   enableBookmarking = NULL,
   uiPattern = "/",
   ...
