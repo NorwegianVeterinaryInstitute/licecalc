@@ -91,7 +91,7 @@ mod_plot_lice_ui <- function(id) {
           inputId = ns("additional_data"),
           label = i18n$t("Additional data for your farm"),
           choices = setNames(1:2, c(
-            "Upload table in csv format (download example.csv)",
+            "Upload table in csv format",
             "Enter data manually"
           )),
           selected = 1
@@ -104,7 +104,14 @@ mod_plot_lice_ui <- function(id) {
             shiny::fileInput(
               ns("csvdata"),
               label = i18n$t("Choose File")
-            )
+            ),
+            shiny::p(
+            shiny::a(
+              shiny::span(shiny::icon("download"), "Download example csv"),
+              href = "/www/lusedata.csv",
+              target = "blank",
+              class = "btn-primary main-button"
+            ))
           )
         ),
         shiny::conditionalPanel(
