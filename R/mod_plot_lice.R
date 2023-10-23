@@ -96,7 +96,6 @@ mod_plot_lice_ui <- function(id) {
           )),
           selected = 1
         ),
-        DT::dataTableOutput(ns("manual_data_table")),
         shiny::conditionalPanel(
           condition = sprintf("input[['%s']] === '1'", ns("additional_data")),
           div(
@@ -130,6 +129,7 @@ mod_plot_lice_ui <- function(id) {
         )
       ),
       shiny::mainPanel(
+        DT::dataTableOutput(ns("manual_data_table")),
         shiny::plotOutput(ns("plot_lice_1")),
         shiny::plotOutput(ns("plot_lice_2")),
         shiny::plotOutput(ns("plot_lice_3")),
@@ -178,7 +178,7 @@ mod_plot_lice_server <- function(id) {
       )
 
       choices_radio_3 <- setNames(1:2, i18n_r()$t(c(
-        "Upload table in csv format (download example.csv)",
+        "Upload table in csv format",
         "Enter data manually"
       )))
       updateRadioButtons(session, "additional_data",
