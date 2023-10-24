@@ -24,7 +24,7 @@ ytrans <- function(x) log(x + .1)
 ytransform <- scales::trans_new(name = "ytrans", transform = function(x) log(x + 0.1), inverse = function(x) exp(x) - 0.1)
 
 results |>
-    dplyr::filter(cage_number == 2) |>
+   # dplyr::filter(cage_number == 2) |>
     ggplot() +
     aes(x = week, y = mu, color = lice_age) +
     geom_segment(aes(x = week, y = ci1_count, xend = week, yend = ci2_count)) +
@@ -35,5 +35,5 @@ results |>
     facet_wrap(~cage_number, ncol = 1) +
     theme_minimal() +
     theme(legend.position = "none") +
-    scale_y_continuous(trans = ytransform, limit = c(0, 5))
-r
+    scale_y_continuous(breaks =  ytrans(c(0,.1,.2,.5,1,2,4,8)), labels = c(0,.1,.2,.5,1,2,4,8)) +
+    scale_x_discrete(labels = c(1, 2, 1, 2, 1, 2))
