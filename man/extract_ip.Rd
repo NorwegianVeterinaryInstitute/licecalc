@@ -11,6 +11,13 @@ extract_ip(lokid)
 \arguments{
 \item{lokid}{The Location ID}
 }
+\value{
+The output is a list with the following elements:
+IP_1wk is infestation pressure used to predict lice 1 week ahead;
+IP_2wk is infestation pressure used to predict lice 2 weeks ahead;
+ST is sea temperature;
+week_no is the week number the data are extracted from.
+}
 \description{
 The extraction is done from internal data. These needs to be updated when
 changes occur. See code in data-raw for more details.
