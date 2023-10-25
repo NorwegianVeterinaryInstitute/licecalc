@@ -1,86 +1,3 @@
-#' extract_IP
-#' Function to extract infestation pressure and sea temperature for a farm
-#' based on the location ID.
-#'
-#' The extraction is done from internal data. These needs to be updated when
-#' changes occur.See code in data-raw for more details.
-#'
-#' @param lokid The Location ID
-#'
-#' @returnThe output is a list with the following elements:
-#' IP_1wk is infestation pressure used to predict lice 1 week ahead;
-#' IP_2wk is infestation pressure used to predict lice 2 weeks ahead;
-#' ST is sea temperature;
-#' week_no is the week number the data are extracted from.
-#'
-#' @export
-#'
-#' @examples
-#' \dontrun{
-#  extract_ip("12115")
-#' }
-
-extract_ip = function(lokid) {
-  which_nxt <-
-    which(colnames(infestation_pressure_all) == "XNextWeek1")
-  this_week <- colnames(infestation_pressure_all)[which_nxt - 1]
-  if (is.element(lokid, rownames(infestation_pressure_all))) {
-    IP_1wk = infestation_pressure_all[lokid, this_week]
-    IP_2wk = infestation_pressure_all[lokid, which_nxt]
-    ST = sea_temperature_all[lokid, this_week]
-    week_no = substr(this_week, 6, 7)
-    return(list(
-      IP_1wk = IP_1wk,
-      IP_2wk = IP_2wk,
-      ST = ST,
-      week_no = week_no
-    ))
-  } else
-    return(NA)
-}
-# Example:
-# datafolder = "//vetinst.no\\dfs-felles/StasjonK/FAG/Akva/FoU-Prosjekter/34055_NewTechAqua/WP2/licecalc/data/"
-# extract_IP("12115")
-
-#' extract_lice
-#'
-#' Function to extract lice data for a farm based on its location ID.
-#'
-#' It requires that 'datafolder' is defined outside of the function and
-#' gives the path to where the input data are stored
-#'
-#' Note: there is an error in the "Fastsittendelus.txt" example file, so this does not work 100 % yet.
-#'
-#' @param lokid is the location ID
-#'
-#' @return
-#' The output is a list with the following elements:
-#' AF is the latest reported number of adult female lice per fish in the farm
-#' OM is the latest reported number of other motile lice per fish in the farm
-#' FX is the latest reported number of sessile lice per fish in the farm
-#'
-#' @export
-#'
-#' @examples
-extract_lice = function(lokid){
-  AF_all = read.table(paste0(datafolder, "VoksneHunnlus.txt"), sep = "\t", dec = ",")
-  OM_all = read.table(paste0(datafolder, "BevegligeLus.txt"), sep = "\t", dec = ",")
-  # FX_all = read.table(paste0(datafolder, "Fastsittendelus.txt"), sep = "\t", dec = ",")
-  this_week <- colnames(AF_all)[ncol(AF_all)]
-  if(is.element(lokid, rownames(AF_all))){
-    AF = AF_all[lokid, this_week]
-    OM = OM_all[lokid, this_week]
-    # FX = FX_all[lokid, this_week]
-    week_no = substr(this_week, 6, 7)
-    return(list(AF=AF, OM=OM, #FX=FX,
-             week_no=week_no))
-  } else return(NA)
-}
-# Example:
-# datafolder = "//vetinst.no\\dfs-felles/StasjonK/FAG/Akva/FoU-Prosjekter/34055_NewTechAqua/WP2/licecalc/data/"
-# extract_lice("12115")
-
-
 #' predict_lice
 #' Function to predict lice per fish in different stages and cages one to two weeks ahead
 #'
@@ -97,37 +14,45 @@ extract_lice = function(lokid){
 #' @param q2 upper limit of prediction interval
 #' @param ncount number of salmon counted in each cage to be predicted
 #'
-#' @return
-#' The output is a list with the following elements:
-#'   FX_1wk is a list with predictions for the number of sessile lice 1 week ahead
-#'   OM_1wk is a list with predictions for the number of other motile lice 1 week ahead
-#'   AF_1wk is a list with predictions for the number of adult female lice 1 week ahead
-#'   FX_2wk is a list with predictions for the number of sessile lice 2 weeks ahead
-#'   OM_2wk is a list with predictions for the number of other motile lice 2 weeks ahead
-#'   AF_2wk is a list with predictions for the number of adult female lice 2 weeks ahead
+#' @return The output is a list with the following elements:
+#' \itemize{
+#'   \item FX_1wk is a list with predictions for the number of sessile lice 1 week ahead
+#'   \item OM_1wk is a list with predictions for the number of other motile lice 1 week ahead
+#'   \item AF_1wk is a list with predictions for the number of adult female lice 1 week ahead
+#'   \item FX_2wk is a list with predictions for the number of sessile lice 2 weeks ahead
+#'   \item OM_2wk is a list with predictions for the number of other motile lice 2 weeks ahead
+#'   \item AF_2wk is a list with predictions for the number of adult female lice 2 weeks ahead
+#'   }
 #' Each of these list elements contains the following elements:
-#'   mu is the expected number of lice per fish
-#'   ci1_true is the lower limit for the true number of lice per fish
-#'   ci2_true is the upper limit for the true number of lice per fish
-#'   ci1_count is the lower limit for the counted number of lice per fish
-#'   ci2_count is the upper limit for the counted number of lice per fish
+#' \itemize {
+#'   \item mu is the expected number of lice per fish
+#'   \item ci1_true is the lower limit for the true number of lice per fish
+#'   \item ci2_true is the upper limit for the true number of lice per fish
+#'   \item ci1_count is the lower limit for the counted number of lice per fish
+#'   \item ci2_count is the upper limit for the counted number of lice per fish
+#'   }
 #'
-#' @export
 #'
 #' @examples
+#' \dontrun{
+#' AF = 1:3
+#' OM = 3:1
+#' FX = c(0,0,.5)
+#' prediction_object = predict_lice(AF=AF, OM=OM, FX=FX)
+#' }
 predict_lice = function(AF,
-                         OM,
-                         FX,
-                         ST = 9,
-                         W_SAL = 2.2,
-                         N_SAL = 130,
-                         CLF = F,
-                         IP_1wk = 94000,
-                         IP_2wk = 94000,
-                         q1 = 0.05,
-                         q2 = 0.95,
-                         ncount = 20
-                     ){
+                        OM,
+                        FX,
+                        ST = 9,
+                        W_SAL = 2.2,
+                        N_SAL = 130,
+                        CLF = F,
+                        IP_1wk = 94000,
+                        IP_2wk = 94000,
+                        q1 = 0.05,
+                        q2 = 0.95,
+                        ncount = 20
+){
 
   # Parameter values
   param = list(
@@ -220,18 +145,18 @@ predict_lice = function(AF,
   # - log-expected 1 wk
   logmu_FX_1wk = log(
     param$a0_fx + param$s1 * (1 - d1) * FX_hat +
-    param$a_smp * SMP_FX_1wk) +
+      param$a_smp * SMP_FX_1wk) +
     param$a_nfish_fx * nsal
 
   logmu_OM_1wk = log(
     param$a0_om + param$s2 * d1 * FX_hat +
-    param$s3 * (1 - d2) * OM_hat) +
+      param$s3 * (1 - d2) * OM_hat) +
     param$a_nfish_om * nsal +
     param$a_wgt_om * wgt
 
   logmu_AF_1wk = log(
     param$a0_af + (.5*param$s3 + .5*param$s4) * d2 * OM_hat +
-    param$s4 * AF_hat) +
+      param$s4 * AF_hat) +
     param$a_wgt_af * wgt +
     param$a_wrasse_af * wrasse
 
@@ -356,88 +281,3 @@ predict_lice = function(AF,
                   ci2_count = ci_count_AF_2wk$ci2)
   ))
 }
-
-# Example:
-# AF = 1:3
-# OM = 3:1
-# FX = c(0,0,.5)
-# predict_lice(AF=AF, OM=OM, FX=FX, ST=14)$AF_1wk$mu
-# predict_lice(AF=AF, OM=OM, FX=FX, ST=14)$AF_2wk$mu
-# predict_lice(AF=AF, OM=OM, FX=FX, ST=14)$AF_2wk$ci1_count
-# predict_lice(AF=AF, OM=OM, FX=FX, ST=14)$AF_2wk$ci2_count
-
-#' plot_lice
-#' Function to plot predictions for one cage
-#'
-#' @param prediction.object is a prediction object created with the predict_lice function
-#' @param cage is the cage number
-#' @param lan is language ('no' = Norwegian, 'en' = English)
-#'
-#' @return
-#' The output is a prediction plot for one cage
-#'
-#' @export
-#'
-#' @examples
-plot_lice = function(prediction.object, cage=1, lan="no"){
-
-  yat <- c(0,.1,.2,.5,1,2,4,8)
-  ytrans <- function(x) log(x + .1)
-  ymax <- 5
-
-  # yat=.5*c(0:10)
-  # ytrans = function(x) x
-
-  xlab1 <- ifelse(lan=="no", "Uke", "Week")
-  if(lan=="no") xlab2 <- c("Fastsittende", "Mobile", "Hunnlus") else xlab2 <- c("Sessile", "Motile", "Female")
-  xlab3 <- ifelse(lan=="no", paste0("Bur ", cage), paste0("Cage ", cage))
-
-  ylab <- ifelse(lan=="no", "Lus per fisk", "Lice per fish")
-
-  extractpoint <- function(stage, wk, metric, cage){
-    return(ytrans(prediction.object[[paste0(stage,"_",wk,"wk")]][[metric]][cage]))
-  }
-
-  extractinterval <- function(stage, wk, cage){
-    out <- c(extractpoint(stage, wk, "ci1_count", cage),
-             extractpoint(stage, wk, "ci1_true", cage),
-             extractpoint(stage, wk, "mu", cage),
-             extractpoint(stage, wk, "ci2_true", cage),
-             extractpoint(stage, wk, "ci2_count", cage))
-    return(out)
-  }
-
-  plotinterval <- function(stage, wk, cage, xat, col){
-    interval <- extractinterval(stage, wk, cage)
-    segments(x0 = xat, x1 = xat, y0 = interval[1], y1 = interval[5], col=col)
-    segments(x0 = xat, x1 = xat, y0 = interval[2], y1 = interval[4], col=col, lwd=5)
-    points(x = xat, y = interval[3], col = col, pch = 16, cex = 2)
-  }
-
-  plot(0,0, type="n", xlim = c(0,3), ylim = c(ytrans(0), ytrans(ymax)), axes=F, xlab="", ylab="")
-
-  plotinterval("FX", 1, cage, .33, "grey")
-  plotinterval("FX", 2, cage, .66, "grey")
-
-  plotinterval("OM", 1, cage, 1.33, "blue")
-  plotinterval("OM", 2, cage, 1.66, "blue")
-
-  plotinterval("AF", 1, cage, 2.33, "red")
-  plotinterval("AF", 2, cage, 2.66, "red")
-
-  axis(side=2, at=ytrans(yat), lab=yat)
-
-  mtext(c(1,2,1,2,1,2), side=1, at=c(.33,.66,1.33,1.66,2.33,2.66))
-  mtext(xlab1, side = 1, line = 2)
-  mtext(ylab, side = 2, line = 2.5)
-  mtext(xlab2, side = 3, at = c(.5, 1.5, 2.5))
-  mtext(xlab3, side = 3, line = 2, font = 2)
-}
-
-# Example:
-# AF = 1:3
-# OM = 3:1
-# FX = c(0,0,.5)
-# prediction.object = predict_lice(AF=AF, OM=OM, FX=FX)
-# par(mai = c(.7,.7,.6,.01))
-# plot_lice(prediction.object, cage = 2, lan="en")
