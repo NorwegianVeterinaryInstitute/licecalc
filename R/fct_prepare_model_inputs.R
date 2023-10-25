@@ -7,7 +7,7 @@
 #'
 #' @param lokid The Location ID
 #'
-#' @returnThe output is a list with the following elements:
+#' @return The output is a list with the following elements:
 #' IP_1wk is infestation pressure used to predict lice 1 week ahead;
 #' IP_2wk is infestation pressure used to predict lice 2 weeks ahead;
 #' ST is sea temperature;
