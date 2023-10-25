@@ -15,13 +15,14 @@ app_ui <- function(request) {
     # Your application UI logic
     bslib::page_fluid(theme = bslib::bs_theme(bootswatch = "flatly", version = 5, font_scale = 0.8),
     shiny.i18n::usei18n(i18n),
-    tags$header(div(class = "d-flex flex-row justify-content-between header-container align-items-center", 
+    tags$header(div(class = "d-flex flex-row justify-content-between header-container align-items-center",
     img(class = "header-left", src = "www/vet-rgb-2.svg"),
     div(class = "header-middle", i18n$t("Lice Calculator")),
     div(class = "header-right", shiny::actionLink(inputId = "docs", label = i18n$t("About the calculator")))
 )),
 
-    mod_plot_lice_ui("plot_lice_1")
+    #mod_plot_lice_ui("plot_lice_1")
+    mod_lice_model_v2_ui("lice_model_v2_1")
     )
   )
 }
