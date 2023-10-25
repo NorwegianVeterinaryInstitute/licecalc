@@ -11,3 +11,10 @@ convData <- function(value){
   outvalue <- as.numeric(sub(",", ".", value, fixed = TRUE))
   return(outvalue)
 }
+
+#' ytrans
+#'
+#' @description transform to log scale
+#'
+#' @noRd
+ytrans <- function(x) log(x + .1)
