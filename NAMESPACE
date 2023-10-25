@@ -2,7 +2,6 @@
 
 export(extract_ip)
 export(extract_lice)
-export(plot_lice)
 export(plot_prediction)
 export(restult_to_df)
 export(run_app)

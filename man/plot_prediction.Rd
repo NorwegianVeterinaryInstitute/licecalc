@@ -5,12 +5,14 @@
 \title{plot_predition
 A function to generate plot from the predicted data.}
 \usage{
-plot_prediction(prediction_df, log = TRUE)
+plot_prediction(prediction_df, log = TRUE, lang = "en")
 }
 \arguments{
 \item{prediction_df}{a dataframe returned by `restult_to_df`}
 
-\item{log}{flag for converting the data to log scale. `TRUE` by default.}
+\item{log}{flag for converting the data to log scale. `TRUE` by default}
+
+\item{lang}{the language for the plot. Can be `en` or `nb` only.}
 }
 \value{
 a ggplot2 object
