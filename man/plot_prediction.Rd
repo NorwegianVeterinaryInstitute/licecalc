@@ -23,5 +23,6 @@ A function to generate plot from the predicted data.
 }
 \examples{
 \dontrun{
+ result_to_df(prediction_object) |> plot_prediction()
 }
 }

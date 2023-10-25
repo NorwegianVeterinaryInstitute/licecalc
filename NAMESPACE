@@ -3,7 +3,7 @@
 export(extract_ip)
 export(extract_lice)
 export(plot_prediction)
-export(restult_to_df)
+export(result_to_df)
 export(run_app)
 import(shiny)
 importFrom(golem,activate_js)

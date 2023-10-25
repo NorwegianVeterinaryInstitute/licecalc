@@ -1,4 +1,4 @@
-#' results_to_df
+#' result_to_df
 #'
 #' This function is used to convert list returned from the prediction
 #' function into a data frame for easier manipulation and plotting.
@@ -16,7 +16,7 @@
 #' \dontrun{
 #  result_to_df(prediction_object, log = TRUE)
 #' }
-restult_to_df <- function(prediction_object, log = TRUE) {
+result_to_df <- function(prediction_object, log = TRUE) {
   dat <- as.data.frame(prediction_object) |>
     tibble::rownames_to_column(var = "cage_number") |>
     tidyr::pivot_longer(
@@ -67,7 +67,7 @@ restult_to_df <- function(prediction_object, log = TRUE) {
 #'
 #' @examples
 #' \dontrun{
-#  restult_to_df(prediction_object) |> plot_prediction()
+#'  result_to_df(prediction_object) |> plot_prediction()
 #' }
 plot_prediction <- function(prediction_df, log = TRUE, lang = 'en') {
   p <- prediction_df |>
