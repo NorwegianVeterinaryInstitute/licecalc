@@ -27,3 +27,35 @@ make_plot_from_location <- function(location){
   p
 
 }
+
+
+#' make_plot_for_cages_and_location
+#'
+#' @param location
+#' @param user_data
+#'
+#' @return
+#' @export
+#'
+#' @examples
+make_plot_for_cages_and_location <- function(location, user_data){
+
+  pressure <- extract_ip(location)
+
+  user_data <- na.omit(user_data)
+
+  prediction_object <- predict_lice(IP_1wk = pressure$IP_1wk,
+                                    IP_2wk = pressure$IP_2wk,
+                                    ST = pressure$ST,
+                                    AF = user_data$adult_females,
+                                    OM = user_data$other_motiles,
+                                    FX = user_data$sessiles,
+                                    W_SAL = user_data$fish_weight,
+                                    N_SAL = user_data$fish_abundance,
+                                    CLF = user_data$cleaner_fish)
+
+  p <- result_to_df(prediction_object) |> plot_prediction(location = location)
+
+  p
+
+}

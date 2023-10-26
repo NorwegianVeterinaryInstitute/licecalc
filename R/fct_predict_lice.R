@@ -53,7 +53,7 @@ predict_lice = function(AF,
                         q2 = 0.95,
                         ncount = 20
 ){
-
+#browser()
   # Parameter values
   param = list(
     a0_fx = 0.009259406,

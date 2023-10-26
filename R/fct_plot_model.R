@@ -96,12 +96,12 @@ plot_prediction <-
         alpha = 0.5
       ) +
       ggplot2::geom_point(size = 5, pch = 21) +
-      ggplot2::theme_minimal() +
+      ggplot2::theme_bw() +
       ggplot2::theme(legend.position = "top")
 
     if (lang == 'en') {
       p <- p +
-        ggplot2::facet_wrap(~ cage_name, ncol = 1) +
+        ggplot2::facet_wrap(~ cage_name, ncol = 4, scales = "free_y") +
         ggplot2::labs(
           title = paste("Prediction model results for location number" , location),
           x = "Week",
@@ -114,7 +114,7 @@ plot_prediction <-
 
     if (lang == 'nb') {
       p <- p +
-        ggplot2::facet_wrap(~ cage_name_nb, ncol = 1) +
+        ggplot2::facet_wrap(~ cage_name_nb, ncol = 4, scales = "free_y") +
         ggplot2::labs(
           title = paste("Prediksjonsmodellresultater for stedsnummer", location),
           x = "Uke",
