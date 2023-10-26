@@ -10,10 +10,12 @@ usethis::use_data(luse_demo_data, overwrite = TRUE)
 
 empty <- luse_demo_data
 
-empty$Mobile.lus.pr.fisk.merd <- NA_integer_
-empty$Vekt.merd <- NA_integer_
-empty$Rensefisk.merd <- NA_integer_
-empty$Fastsittende.merd <- NA_integer_
+empty$adult_females <- NA_integer_
+empty$other_motiles <- NA_integer_
+empty$sessiles <- NA_integer_
+empty$fish_weight <- NA_integer_
+empty$fish_abundance <- NA_integer_
+empty$cleaner_fish <- NA_integer_
 
 usethis::use_data(empty, overwrite = TRUE)
 
