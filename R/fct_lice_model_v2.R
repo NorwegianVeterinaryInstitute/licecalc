@@ -1,8 +1,9 @@
 #' lice_model_v2
 #'
-#' @description A fct function
+#' @description A wrapper function tun run the prediction and make a plot.
+#' To be used in the module `mod_lice_model_v2` server.
 #'
-#' @return The return value, if any, from executing the function.
+#' @return A plot object
 #'
 #' @noRd
 

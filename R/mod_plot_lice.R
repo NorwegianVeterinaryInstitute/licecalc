@@ -216,7 +216,7 @@ mod_plot_lice_server <- function(id) {
     observeEvent(input$additional_data, {
       if (input$additional_data == 2) {
         output$manual_data_table <- DT::renderDataTable(
-          empty,
+          empty, # empty df for data import, see code in data-raw
           options = list(pageLength = 20, dom = "t", scrollY = "200px"),
           selection = "none",
           editable = "row", server = FALSE, class = "cell-border stripe",
