@@ -209,9 +209,9 @@ mod_lice_model_v2_server <- function(id) {
     })
 
     # uncomment for debugging
-    # observeEvent(manual_data_rct(), {
-    #  print(manual_data_rct())
-    #})
+     observeEvent(manual_data_rct(), {
+      print(manual_data_rct())
+    })
 
     ##### --- PLOTS --- #####
 

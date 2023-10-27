@@ -1,25 +1,30 @@
-#' lice_model_v2
+#' make_plot_from_location
+#' This function creates a prediction plot for farm level data.
 #'
 #' @description A wrapper function tun run the prediction and make a plot.
-#' To be used in the module `mod_lice_model_v2` server.
+#' To be used in the module `mod_calculate_farm_level_prediction` server.
 #'
 #' @return A plot object
 #'
 #' @noRd
 
 
-make_plot_from_location <- function(location){
+make_plot_from_location <- function(location, weight, abundance, cleaner){
 
   pressure <- extract_ip(location)
 
   lice_counts <- extract_lice(location)
+
 
   prediction_object <- predict_lice(IP_1wk = pressure$IP_1wk,
                IP_2wk = pressure$IP_2wk,
                ST = pressure$ST,
                AF = lice_counts$AF,
                OM = lice_counts$OM,
-               FX = 5 #lice_counts$FX
+               FX = 1, #lice_counts$FX,
+               W_SAL = conv_data(weight),
+               N_SAL = conv_data(abundance),
+               CLF = cleaner
   )
 
   p <- result_to_df(prediction_object) |> plot_prediction(location = location)

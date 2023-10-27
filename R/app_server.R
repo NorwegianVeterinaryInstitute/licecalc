@@ -6,18 +6,15 @@
 #' @noRd
 app_server <- function(input, output, session) {
   # Your application server logic
+  translator <- golem::get_golem_options(which = "translator")
+  i18n <- reactive({
+    get_reactive_translator(translator, input$selected_language)})
 
-  observeEvent(input$docs, {
-    if (session$userData$shiny.i18n$lang() == "en") {
-      path = app_sys("app/www/documentation.Rmd") }
-        else {
-          path = app_sys("app/www/dokumentasjon.Rmd")
-        }
-    shiny::showModal(
-        modalDialog(includeMarkdown(path)
-      ))
+  output$app_title <- renderUI({
+    shiny::h3(i18n()$t("Lice Calculator"))
   })
 
-  #mod_plot_lice_server("plot_lice_1")
-  mod_lice_model_v2_server("lice_model_v2_1")
+  mod_calculate_farm_level_prediction_server("calculate_farm_level_prediction_1",
+                                             reactive({input$selected_language}))
+
 }
