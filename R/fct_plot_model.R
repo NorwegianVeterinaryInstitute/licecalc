@@ -101,7 +101,7 @@ plot_prediction <-
 
     if (lang == 'en') {
       p <- p +
-        ggplot2::facet_wrap(~ cage_name, ncol = 4, scales = "free_y") +
+        ggplot2::facet_wrap(~ cage_number, ncol = 4) +
         ggplot2::labs(
           title = paste("Prediction model results for location number" , location),
           x = "Week",
@@ -114,7 +114,7 @@ plot_prediction <-
 
     if (lang == 'nb') {
       p <- p +
-        ggplot2::facet_wrap(~ cage_name_nb, ncol = 4, scales = "free_y") +
+        ggplot2::facet_wrap(~ cage_number, ncol = 4) +
         ggplot2::labs(
           title = paste("Prediksjonsmodellresultater for stedsnummer", location),
           x = "Uke",
