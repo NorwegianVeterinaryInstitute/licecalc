@@ -39,7 +39,10 @@ app_ui <- function(request) {
         title = "Farm Prediction",
         mod_calculate_farm_level_prediction_ui("calculate_farm_level_prediction_1")
       ),
-      bslib::nav_panel(title = "Cage Prediction"),
+      bslib::nav_panel(
+        title = "Cage Prediction",
+        mod_calculate_cage_level_prediction_ui("calculate_cage_level_prediction_1")
+        ),
       bslib::nav_panel(title = "Manual Input"),
       bslib::nav_panel(title = "About"),
       bslib::nav_item(

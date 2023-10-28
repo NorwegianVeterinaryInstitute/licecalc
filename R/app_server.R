@@ -17,4 +17,7 @@ app_server <- function(input, output, session) {
   mod_calculate_farm_level_prediction_server("calculate_farm_level_prediction_1",
                                              reactive({input$selected_language}))
 
+  mod_calculate_cage_level_prediction_server("calculate_cage_level_prediction_1",
+                                             reactive({input$selected_language}))
+
 }
