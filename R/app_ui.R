@@ -43,8 +43,10 @@ app_ui <- function(request) {
         title = "Cage Prediction",
         mod_calculate_cage_level_prediction_ui("calculate_cage_level_prediction_1")
         ),
-      bslib::nav_panel(title = "Manual Input"),
-      bslib::nav_panel(title = "About"),
+      bslib::nav_panel(
+        title = "Manual Input",
+        mod_calculate_manual_input_prediction_ui("calculate_manual_input_prediction_1")),
+      bslib::nav_panel(title = "About", mod_about_ui("about_1")),
       bslib::nav_item(
         shiny::selectInput(
           inputId = "selected_language",
