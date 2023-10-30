@@ -27,7 +27,8 @@ make_plot_from_location <- function(location, weight, abundance, cleaner){
                CLF = cleaner
   )
 
-  p <- result_to_df(prediction_object) |> plot_prediction(location = location)
+  p <- result_to_df(prediction_object) |>
+    plot_prediction(location = location, week_number = pressure$week_no)
 
   p
 
@@ -59,7 +60,39 @@ make_plot_for_cages_and_location <- function(location, user_data){
                                     N_SAL = user_data$fish_abundance,
                                     CLF = user_data$cleaner_fish)
 
-  p <- result_to_df(prediction_object) |> plot_prediction(location = location)
+  p <- result_to_df(prediction_object) |> plot_prediction(location = location,
+                                                          week_number = pressure$week_no)
+
+  p
+
+}
+
+
+#' make_plot_for_game
+#'
+#' @param location
+#' @param user_data
+#'
+#' @return
+#' @export
+#'
+#' @examples
+make_plot_for_game <- function(ip1, ip2, st, user_data){
+
+  user_data <- na.omit(user_data)
+
+  prediction_object <- predict_lice(IP_1wk = ip1,
+                                    IP_2wk = ip2,
+                                    ST = st,
+                                    AF = user_data$adult_females,
+                                    OM = user_data$other_motiles,
+                                    FX = user_data$sessiles,
+                                    W_SAL = user_data$fish_weight,
+                                    N_SAL = user_data$fish_abundance,
+                                    CLF = user_data$cleaner_fish)
+
+  p <- result_to_df(prediction_object) |> plot_prediction(location = location,
+                                                          week_number = pressure$week_no)
 
   p
 

@@ -13,12 +13,19 @@ app_ui <- function(request) {
     golem_add_external_resources(),
     shiny.i18n::usei18n(i18n),
 
+    # Font setup
+
     # Your application UI logic
     bslib::page_navbar(
       theme = bslib::bs_theme(
         bootswatch = "zephyr",
         version = 5,
-        font_scale = 0.8
+        font_scale = 0.8,
+         base_font = bslib::font_face(
+           family = "Futura PT",
+           style = "Medium",
+           src = "www/Futura PT Medium.ttf"
+        )
       ),
       inverse = FALSE,
 

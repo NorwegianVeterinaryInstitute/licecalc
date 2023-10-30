@@ -18,12 +18,12 @@ mod_calculate_manual_input_prediction_ui <- function(id) {
         "Enter data in cells bellow. Double click to edit cells. Ctr+Enter to save."
       ),
       bslib::card_body(DT::dataTableOutput(ns(
-        "manual_data_table"
+        "manual_data_table_game"
       ),))
     ),
     bslib::card(
       bslib::card_header("Prediction per cage"),
-      bslib::card_body(shiny::plotOutput(ns("plot_cage")))
+      bslib::card_body(shiny::plotOutput(ns("plot_cage_game")))
     )
   ))
 }
@@ -76,6 +76,49 @@ mod_calculate_manual_input_prediction_server <- function(id, selected_language){
         shiny::helpText("Bla bla bla")
       )
     })
+
+    output$manual_data_table_game <- DT::renderDataTable({
+      if (i18n()$get_translation_language() == 'en') {
+        dat <- empty
+        caption = "Double click to edit cells. Ctr+Enter to save."
+      } else {
+        dat = empty_nb
+        caption = "Dobbeltklikk for å redigere celler. Ctr+Enter for å lagre."
+      }
+
+      DT::datatable(
+        dat,
+        # empty data frame, see data-raw for more.
+        options = list(
+          pageLength = 20,
+          dom = "t",
+          scrollY = "200px"
+        ),
+        selection = "none",
+        editable = list(target = "row", disable = list(columns = 0)),
+        class = "cell-border stripe",
+        caption = caption
+      )
+    }, server =  FALSE)
+
+
+
+
+
+    output$plot_cage <- shiny::renderPlot(
+      {
+
+
+          make_plot_for_game(
+            ip1 = input$infectious_pressure_manually_1week,
+            ip2 = input$infectious_pressure_manually_2week,
+            st = input$sea_temperature_manually,
+            user_data = manual_data_rct()
+          )
+      }
+    ) |> shiny::bindEvent(input$predict)
+
+
 })
 }
 

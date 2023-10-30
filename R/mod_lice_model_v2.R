@@ -187,9 +187,9 @@ mod_lice_model_v2_server <- function(id) {
             scrollY = "200px"
           ),
           selection = "none",
-          editable = "row",
+          editable = list(target = "row", disable = list(columns = 0)),
           server = FALSE,
-          class = "cell-border stripe",
+          class = "cell-border stripe compact",
           caption = "Double click to edit cells. Ctr+Enter to save."
         )
       }
@@ -201,6 +201,18 @@ mod_lice_model_v2_server <- function(id) {
       modified_row <-as.numeric(input$manual_data_table_cell_edit$value[1])
       entered_values <-
         as.numeric(input$manual_data_table_cell_edit$value[2:7])
+
+      if (!entered_values[[7]] %in% c(0, 1)) {
+        showModal(modalDialog(
+          title = "Error",
+          sprintf(
+            "The %s column accepts only 0 (no), or 1 (yes)",
+            names(luse_demo_data)[[7]]
+          )
+        ))
+        return(NULL)
+      }
+
 
       current_manual_data <- manual_data_rct()
       current_manual_data[modified_row, ] <- entered_values

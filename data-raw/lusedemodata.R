@@ -17,6 +17,15 @@ empty$fish_weight <- NA_integer_
 empty$fish_abundance <- NA_integer_
 empty$cleaner_fish <- NA_integer_
 
+names(empty) <- c("Adult Females", "Other Motiles", "Sessiles", "Fish Weight",
+                  "Fish Abundance", "Cleaner Fish")
+
+empty_nb <- empty
+
+names(empty_nb) <-  c("Adult Females", "Other Motiles", "Sessiles", "Fish Weight",
+                      "Fish Abundance", "Cleaner Fish")
+
+usethis::use_data(empty_nb, overwrite = TRUE)
 usethis::use_data(empty, overwrite = TRUE)
 
 

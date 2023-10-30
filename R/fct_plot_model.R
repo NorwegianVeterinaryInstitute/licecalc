@@ -75,7 +75,8 @@ plot_prediction <-
   function(prediction_df,
            log = TRUE,
            lang = 'en',
-           location = NULL) {
+           location = NULL,
+           week_number = NULL) {
     p <- prediction_df |>
       ggplot2::ggplot() +
       ggplot2::aes(x = week, y = mu, color = lice_age) +
@@ -104,6 +105,7 @@ plot_prediction <-
         ggplot2::facet_wrap(~ cage_number, ncol = 4) +
         ggplot2::labs(
           title = paste("Prediction model results for location number" , location),
+          subtitle = paste("The prediction is run starting from week", week_number, "of the current year."),
           x = "Week",
           y = "Lice per Fish"
         ) +
@@ -117,6 +119,7 @@ plot_prediction <-
         ggplot2::facet_wrap(~ cage_number, ncol = 4) +
         ggplot2::labs(
           title = paste("Prediksjonsmodellresultater for stedsnummer", location),
+          subtitle = paste("The prediction is run starting from week", week_number, "of the current year."),
           x = "Uke",
           y = "Lus per fisk"
         ) +

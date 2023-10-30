@@ -12,15 +12,11 @@ mod_calculate_cage_level_prediction_ui <- function(id) {
   tagList(bslib::layout_sidebar(
     sidebar = bslib::sidebar(shiny::uiOutput(ns('sidebar_cage'))),
 
-    bslib::card(
-      bslib::card_header("Enter data in cells bellow. Double click to edit cells. Ctr+Enter to save."),
-      bslib::card_body(
-    DT::dataTableOutput(ns("manual_data_table"),
-      ))),
+    shiny::uiOutput(ns("manual_data_card")),
     bslib::card(
       bslib::card_header("Prediction per cage"),
       bslib::card_body(
-    shiny::plotOutput(ns("plot_cage")))
+    shiny::plotOutput(ns("plot_cage"), height = '1200px'))
   )))
 }
 
@@ -57,19 +53,19 @@ mod_calculate_cage_level_prediction_server <-
             div(
               class = "d-flex flex-column",
               shiny::fileInput(ns("csvdata"),
-                               label = i18n()$t("Choose File")),
-              shiny::p(
-                shiny::a(
-                  shiny::span(shiny::icon("download"), "Download example csv"),
-                  href = "/www/lusedata.csv",
-                  target = "blank",
-                  class = "btn-primary main-button"
-                )
-              )
+                               label = i18n()$t("Choose File"))
             )
           ),
           shiny::conditionalPanel(condition = sprintf(
             "input[['%s']] === '2'", ns("additional_data"))
+          ),
+          shiny::p(
+            shiny::a(
+              shiny::span(shiny::icon("download"), "Download example csv"),
+              href = "/www/lusedata.csv",
+              target = "blank",
+              class = "btn-primary main-button"
+            )
           ),
           shiny::actionButton(
             inputId = ns("predict"),
@@ -118,8 +114,35 @@ mod_calculate_cage_level_prediction_server <-
 
       ##### --- MANUAL DATA --- #####
 
+      manual_data_ui <- eventReactive(input$additional_data,
+                    {
+                      if (input$additional_data == 2) {
+                        ui <-     bslib::card(
+                          bslib::card_header(
+                            "Enter data in cells bellow. Double click to edit cells. Ctr+Enter to save."
+                          ),
+                          bslib::card_body(DT::dataTableOutput(ns(
+                            "manual_data_table"
+                          ),))
+                        )
+
+                      } else {
+                        ui <- shiny::div()
+                      }
+
+                      return(ui)
+                    })
+
+      output$manual_data_card <- shiny::renderUI(
+        {
+          manual_data_ui()
+        }
+      )
+
       observeEvent(input$additional_data, {
         if (input$additional_data == 2) {
+          if(i18n()$get_translation_language() == 'en') {
+
           output$manual_data_table <- DT::renderDataTable(
             empty,
             # empty data frame, see data-raw for more.
@@ -129,11 +152,31 @@ mod_calculate_cage_level_prediction_server <-
               scrollY = "200px"
             ),
             selection = "none",
-            editable = "row",
+            editable = list(target = "row", disable = list(columns = 0)),
             server = FALSE,
             class = "cell-border stripe",
             caption = "Double click to edit cells. Ctr+Enter to save."
-          )
+          ) } else {
+
+            output$manual_data_table <- DT::renderDataTable(
+              empty_nb,
+              # empty data frame, see data-raw for more.
+              options = list(
+                pageLength = 20,
+                dom = "t",
+                scrollY = "200px"
+              ),
+              selection = "none",
+              editable = list(target = "row", disable = list(columns = 0)),
+              server = FALSE,
+              class = "cell-border stripe",
+              caption = "Dobbeltklikk for å redigere celler. Ctr+Enter for å lagre."
+            )
+
+          }
+
+
+
         }
       })
 
@@ -154,6 +197,21 @@ mod_calculate_cage_level_prediction_server <-
       observeEvent(manual_data_rct(), {
         print(manual_data_rct())
       })
+
+      output$plot_cage <- shiny::renderPlot(
+        {
+
+          if(input$additional_data == 2) {
+          make_plot_for_cages_and_location(
+            location = input$locality_number,
+            user_data = manual_data_rct()
+          )} else {
+            make_plot_for_cages_and_location(
+              location = input$locality_number,
+              user_data = user_data()
+            )}
+        }
+      ) |> shiny::bindEvent(input$predict)
 
     })
   }
