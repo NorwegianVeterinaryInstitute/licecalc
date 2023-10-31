@@ -187,6 +187,17 @@ mod_calculate_cage_level_prediction_server <-
         entered_values <-
           as.numeric(input$manual_data_table_cell_edit$value[2:7])
 
+        if (!entered_values[[7]] %in% c(0, 1)) {
+          showModal(modalDialog(
+            title = "Error",
+            sprintf(
+              "The %s column accepts only 0 (no), or 1 (yes)",
+              names(luse_demo_data)[[7]]
+            )
+          ))
+          return(NULL)
+        }
+
         current_manual_data <- manual_data_rct()
         current_manual_data[modified_row, ] <- entered_values
         names(current_manual_data) <- names(luse_demo_data)
@@ -198,20 +209,42 @@ mod_calculate_cage_level_prediction_server <-
         print(manual_data_rct())
       })
 
-      output$plot_cage <- shiny::renderPlot(
-        {
-
-          if(input$additional_data == 2) {
-          make_plot_for_cages_and_location(
-            location = input$locality_number,
-            user_data = manual_data_rct()
-          )} else {
-            make_plot_for_cages_and_location(
-              location = input$locality_number,
-              user_data = user_data()
-            )}
+      output$plot_cage <- shiny::renderPlot({
+        if (input$additional_data == 2) {
+          tryCatch(
+            expr = {
+              make_plot_for_cages_and_location(location = input$locality_number,
+                                               user_data = manual_data_rct())
+            },
+            error = function(e) {
+              showModal(
+                modalDialog(
+                  title = "Error",
+                  "The locality was found, but we could not generate predictions."
+                )
+              )
+            }
+          )
         }
-      ) |> shiny::bindEvent(input$predict)
+        else {
+          tryCatch(
+            expr = {
+              make_plot_for_cages_and_location(location = input$locality_number,
+                                               user_data = user_data())
+            },
+
+            error = function(e) {
+              showModal(
+                modalDialog(
+                  title = "Error",
+                  "The locality was found, but we could not generate predictions."
+                )
+              )
+            }
+          )
+        }
+
+      }) |> shiny::bindEvent(input$predict)
 
     })
   }

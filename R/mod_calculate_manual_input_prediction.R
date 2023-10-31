@@ -107,14 +107,25 @@ mod_calculate_manual_input_prediction_server <- function(id, selected_language){
 
     output$plot_cage <- shiny::renderPlot(
       {
-
+        tryCatch(
+          expr = {
 
           make_plot_for_game(
             ip1 = input$infectious_pressure_manually_1week,
             ip2 = input$infectious_pressure_manually_2week,
             st = input$sea_temperature_manually,
             user_data = manual_data_rct()
+          )},
+
+      error = function(e) {
+        showModal(
+          modalDialog(
+            title = "Error",
+            "The locality was found, but we could not generate predictions."
           )
+        )
+      }
+    )
       }
     ) |> shiny::bindEvent(input$predict)
 

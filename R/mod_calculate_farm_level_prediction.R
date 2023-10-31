@@ -66,10 +66,22 @@ mod_calculate_farm_level_prediction_server <- function(id, selected_language){
 
     output$plot_farm <- shiny::renderPlot(
       {
+        tryCatch(
+          expr = {
         make_plot_from_location(location = input$locality_number,
                                 weight = input$fish_weight_farm,
                                 abundance = input$fish_abundance_farm,
                                 cleaner = input$cleaner_fish_farm)
+          },
+        error = function(e) {
+          showModal(
+            modalDialog(
+              title = "Error",
+              "The locality was found, but we could not generate predictions."
+            )
+          )
+        }
+        )
       }
     ) |> shiny::bindEvent(input$predict)
 
