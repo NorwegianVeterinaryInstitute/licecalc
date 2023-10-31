@@ -13,17 +13,10 @@ mod_calculate_manual_input_prediction_ui <- function(id) {
   tagList(bslib::layout_sidebar(
     sidebar = bslib::sidebar(shiny::uiOutput(ns('manual'))),
 
+    shiny::uiOutput(ns("manual_data_card_game")),
     bslib::card(
-      bslib::card_header(
-        "Enter data in cells bellow. Double click to edit cells. Ctr+Enter to save."
-      ),
-      bslib::card_body(DT::dataTableOutput(ns(
-        "manual_data_table_game"
-      ),))
-    ),
-    bslib::card(
-      bslib::card_header("Prediction per cage"),
-      bslib::card_body(shiny::plotOutput(ns("plot_cage_game")))
+      bslib::card_header(shiny::uiOutput(ns("card_title_game_plot"))),
+      bslib::card_body(shiny::plotOutput(ns("plot_cage_game"), height = '1200px'))
     )
   ))
 }
@@ -101,8 +94,58 @@ mod_calculate_manual_input_prediction_server <- function(id, selected_language){
       )
     }, server =  FALSE)
 
+    ##### --- MANUAL DATA --- #####
+
+    manual_data_game_ui <- reactive(
+                                    {
+                                      if (i18n()$get_translation_language() == 'en') {
+                                        ui <- bslib::card(
+                                          bslib::card_header(
+                                            "Enter data in cells bellow. Check the demodata file for guidance."
+                                          ),
+                                          bslib::card_body(DT::dataTableOutput(ns(
+                                            "manual_data_table_game"
+                                          ), ))
+                                        )
+                                      } else {
+                                        ui <- bslib::card(
+                                          bslib::card_header(
+                                            "Skriv inn data i cellene nedenfor. Sjekk demodatafilen for veiledning."
+                                          ),
+                                          bslib::card_body(DT::dataTableOutput(ns(
+                                            "manual_data_table_game"
+                                          ), ))
+                                        )
+                                      }
 
 
+
+                                      return(ui)
+                                    })
+
+    output$manual_data_card_game <- shiny::renderUI({
+      manual_data_game_ui()
+    })
+
+    card_title_game_ui <- reactive({
+      if (i18n()$get_translation_language() == 'en') {
+        ui <-
+          shiny::renderText(
+            "Prediction per cage"
+          )
+      } else {
+        ui <-
+          shiny::renderText(
+            "Prediksjon per bur"
+          )
+      }})
+
+
+    output$card_title_game_plot <- shiny::renderUI(
+      {
+        card_title_game_ui()
+      }
+    )
 
 
     output$plot_cage <- shiny::renderPlot(

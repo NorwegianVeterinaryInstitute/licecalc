@@ -14,7 +14,7 @@ mod_calculate_cage_level_prediction_ui <- function(id) {
 
     shiny::uiOutput(ns("manual_data_card")),
     bslib::card(
-      bslib::card_header("Prediction per cage"),
+      bslib::card_header(shiny::uiOutput(ns("card_title_plot"))),
       bslib::card_body(
     shiny::plotOutput(ns("plot_cage"), height = '1200px'))
   )))
@@ -117,14 +117,25 @@ mod_calculate_cage_level_prediction_server <-
       manual_data_ui <- eventReactive(input$additional_data,
                     {
                       if (input$additional_data == 2) {
-                        ui <-     bslib::card(
-                          bslib::card_header(
-                            "Enter data in cells bellow. Double click to edit cells. Ctr+Enter to save."
-                          ),
-                          bslib::card_body(DT::dataTableOutput(ns(
-                            "manual_data_table"
-                          ),))
-                        )
+                        if (i18n()$get_translation_language() == 'en') {
+                          ui <- bslib::card(
+                            bslib::card_header(
+                              "Enter data in cells bellow. Check the demodata file for guidance."
+                            ),
+                            bslib::card_body(DT::dataTableOutput(ns(
+                              "manual_data_table"
+                            ), ))
+                          )
+                        } else {
+                          ui <- bslib::card(
+                            bslib::card_header(
+                              "Skriv inn data i cellene nedenfor. Sjekk demodatafilen for veiledning."
+                            ),
+                            bslib::card_body(DT::dataTableOutput(ns(
+                              "manual_data_table"
+                            ), ))
+                          )
+                        }
 
                       } else {
                         ui <- shiny::div()
@@ -136,6 +147,26 @@ mod_calculate_cage_level_prediction_server <-
       output$manual_data_card <- shiny::renderUI(
         {
           manual_data_ui()
+        }
+      )
+
+      card_title_ui <- reactive({
+        if (i18n()$get_translation_language() == 'en') {
+          ui <-
+            shiny::renderText(
+              "Prediction per cage"
+            )
+        } else {
+          ui <-
+            shiny::renderText(
+              "Prediksjon per bur"
+            )
+        }})
+
+
+      output$card_title_plot <- shiny::renderUI(
+        {
+          card_title_ui()
         }
       )
 
@@ -205,9 +236,9 @@ mod_calculate_cage_level_prediction_server <-
       })
 
       # uncomment for debugging
-      observeEvent(manual_data_rct(), {
-        print(manual_data_rct())
-      })
+      # observeEvent(manual_data_rct(), {
+      #  print(manual_data_rct())
+      # })
 
       output$plot_cage <- shiny::renderPlot({
         if (input$additional_data == 2) {

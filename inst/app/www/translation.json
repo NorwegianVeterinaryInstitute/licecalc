@@ -99,7 +99,39 @@
     },
     {
       "en": "Manual Input",
-      "nb": "manuell inntasting"
+      "nb": "Manuell inntasting"
+    },
+    {
+      "en": "Fish weight",
+      "nb": "Fiskevekt"
+    },
+    {
+      "en": "Fish abundance",
+      "nb": "Fiskeoverflod"
+    },
+    {
+      "en": "Presence of cleaner fish",
+      "nb": "Tilstedeværelse av rensefisk"
+    },
+    {
+      "en": "Predict",
+      "nb": "Forutsi"
+    },
+    {
+      "en": "Infectious presure first week",
+      "nb": "Infeksiøst trykk første uke"
+    },
+    {
+      "en": "Infectious presure second week",
+      "nb": "Infeksiøst trykk andre uke"
+    },
+    {
+      "en": "Sea temperature",
+      "nb": "Sjøtemperatur"
+    },
+    {
+      "en": "Prediction per cage",
+      "nb": "Prediksjon per bur"
     }
   ]
 }

@@ -22,11 +22,11 @@ names(empty) <- c("Adult Females", "Other Motiles", "Sessiles", "Fish Weight",
 
 empty_nb <- empty
 
-names(empty_nb) <-  c("Adult Females", "Other Motiles", "Sessiles", "Fish Weight",
-                      "Fish Abundance", "Cleaner Fish")
+names(empty_nb) <-  c("Hunnlus", "Mobile", "Fastsittende", "Fiskevekt",
+                      "Fiskeoverflod", "Rensefisk")
 
-usethis::use_data(empty_nb, overwrite = TRUE)
 usethis::use_data(empty, overwrite = TRUE)
+usethis::use_data(empty_nb, overwrite = TRUE)
 
 
 ## d in the original code
