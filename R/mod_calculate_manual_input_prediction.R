@@ -114,7 +114,8 @@ mod_calculate_manual_input_prediction_server <- function(id, selected_language){
             ip1 = input$infectious_pressure_manually_1week,
             ip2 = input$infectious_pressure_manually_2week,
             st = input$sea_temperature_manually,
-            user_data = manual_data_rct()
+            user_data = manual_data_rct(),
+            lang = i18n()$get_translation_language()
           )},
 
       error = function(e) {

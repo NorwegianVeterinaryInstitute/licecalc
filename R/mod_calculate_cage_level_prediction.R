@@ -214,7 +214,8 @@ mod_calculate_cage_level_prediction_server <-
           tryCatch(
             expr = {
               make_plot_for_cages_and_location(location = input$locality_number,
-                                               user_data = manual_data_rct())
+                                               user_data = manual_data_rct(),
+                                               lang = i18n()$get_translation_language())
             },
             error = function(e) {
               showModal(
@@ -230,7 +231,8 @@ mod_calculate_cage_level_prediction_server <-
           tryCatch(
             expr = {
               make_plot_for_cages_and_location(location = input$locality_number,
-                                               user_data = user_data())
+                                               user_data = user_data(),
+                                               lang = i18n()$get_translation_language())
             },
 
             error = function(e) {

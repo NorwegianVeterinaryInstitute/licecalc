@@ -71,7 +71,8 @@ mod_calculate_farm_level_prediction_server <- function(id, selected_language){
         make_plot_from_location(location = input$locality_number,
                                 weight = input$fish_weight_farm,
                                 abundance = input$fish_abundance_farm,
-                                cleaner = input$cleaner_fish_farm)
+                                cleaner = input$cleaner_fish_farm,
+                                lang = i18n()$get_translation_language())
           },
         error = function(e) {
           showModal(

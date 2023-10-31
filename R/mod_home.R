@@ -27,7 +27,7 @@ mod_home_server <- function(id, selected_language){
     })
 
     output$home <- shiny::renderUI({
-
+#browser()
       if(i18n()$get_translation_language() == 'en') {
       shiny::tagList(
         tagList(

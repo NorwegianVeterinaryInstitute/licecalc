@@ -9,7 +9,7 @@
 #' @noRd
 
 
-make_plot_from_location <- function(location, weight, abundance, cleaner){
+make_plot_from_location <- function(location, weight, abundance, cleaner, lang){
 
   pressure <- extract_ip(location)
 
@@ -28,7 +28,9 @@ make_plot_from_location <- function(location, weight, abundance, cleaner){
   )
 
   p <- result_to_df(prediction_object) |>
-    plot_prediction(location = location, week_number = pressure$week_no)
+    plot_prediction(location = location,
+                    week_number = pressure$week_no,
+                    lang = lang)
 
   p
 
@@ -43,7 +45,7 @@ make_plot_from_location <- function(location, weight, abundance, cleaner){
 #' @return a plot object
 #'
 #' @noRd
-make_plot_for_cages_and_location <- function(location, user_data){
+make_plot_for_cages_and_location <- function(location, user_data, lang){
 
   pressure <- extract_ip(location)
 
@@ -59,8 +61,10 @@ make_plot_for_cages_and_location <- function(location, user_data){
                                     N_SAL = user_data$fish_abundance,
                                     CLF = user_data$cleaner_fish)
 
-  p <- result_to_df(prediction_object) |> plot_prediction(location = location,
-                                                          week_number = pressure$week_no)
+  p <- result_to_df(prediction_object) |>
+    plot_prediction(location = location,
+                    week_number = pressure$week_no,
+                    lang = lang)
 
   p
 
@@ -75,7 +79,7 @@ make_plot_for_cages_and_location <- function(location, user_data){
 #' @return a plot object
 #'
 #' @noRd
-make_plot_for_game <- function(ip1, ip2, st, user_data){
+make_plot_for_game <- function(ip1, ip2, st, user_data, lang){
 
   user_data <- na.omit(user_data)
 
@@ -89,8 +93,10 @@ make_plot_for_game <- function(ip1, ip2, st, user_data){
                                     N_SAL = user_data$fish_abundance,
                                     CLF = user_data$cleaner_fish)
 
-  p <- result_to_df(prediction_object) |> plot_prediction(location = location,
-                                                          week_number = pressure$week_no)
+  p <- result_to_df(prediction_object) |>
+    plot_prediction(location = location,
+                    week_number = pressure$week_no,
+                    lang = lang)
 
   p
 
