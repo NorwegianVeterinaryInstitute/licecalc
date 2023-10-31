@@ -15,6 +15,26 @@ app_server <- function(input, output, session) {
     shiny::h3(i18n()$t("Lice Calculator"))
   })
 
+  output$home_tab <- renderUI({
+    shiny::h6(i18n()$t("Home"))
+  })
+
+  output$farm_tab <- renderUI({
+    shiny::h6(i18n()$t("Farm Prediction"))
+  })
+
+  output$cage_tab <- renderUI({
+    shiny::h6(i18n()$t("Cage Prediction"))
+  })
+
+  output$game_tab <- renderUI({
+    shiny::h6(i18n()$t("Manual Input"))
+  })
+
+  output$about_tab <- renderUI({
+    shiny::h6(i18n()$t("About"))
+  })
+
   mod_home_server("home_1", reactive({
     input$selected_language
   }))

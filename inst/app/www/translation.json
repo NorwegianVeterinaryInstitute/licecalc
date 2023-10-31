@@ -80,6 +80,26 @@
     {
       "en": "Lice Calculator",
       "nb": "Lusekalkulator"
+    },
+    {
+      "en": "Home",
+      "nb": "Hjem"
+    },
+    {
+      "en": "About",
+      "nb": "Om"
+    },
+    {
+      "en": "Farm Prediction",
+      "nb": "Gårdsprediksjon"
+    },
+    {
+      "en": "Cage Prediction",
+      "nb": "Prediksjon av bur"
+    },
+    {
+      "en": "Manual Input",
+      "nb": "manuell inntasting"
     }
   ]
 }

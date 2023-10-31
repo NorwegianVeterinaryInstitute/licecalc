@@ -13,18 +13,16 @@ app_ui <- function(request) {
     golem_add_external_resources(),
     shiny.i18n::usei18n(i18n),
 
-    # Font setup
-
     # Your application UI logic
     bslib::page_navbar(
       theme = bslib::bs_theme(
         bootswatch = "zephyr",
         version = 5,
         font_scale = 0.8,
-         base_font = bslib::font_face(
-           family = "Futura PT",
-           style = "Medium",
-           src = "www/Futura PT Medium.ttf"
+        base_font = bslib::font_face(
+          family = "Futura PT",
+          style = "Medium",
+          src = "www/Futura PT Medium.ttf"
         )
       ),
       inverse = FALSE,
@@ -41,19 +39,20 @@ app_ui <- function(request) {
       bslib::nav_item(shiny::uiOutput("app_title")),
 
       bslib::nav_spacer(),
-      bslib::nav_panel(title = "Home", mod_home_ui("home_1")),
+      bslib::nav_panel(title = shiny::uiOutput("home_tab"), mod_home_ui("home_1")),
       bslib::nav_panel(
-        title = "Farm Prediction",
+        title = shiny::uiOutput("farm_tab"),
         mod_calculate_farm_level_prediction_ui("calculate_farm_level_prediction_1")
       ),
       bslib::nav_panel(
-        title = "Cage Prediction",
+        title = shiny::uiOutput("cage_tab"),
         mod_calculate_cage_level_prediction_ui("calculate_cage_level_prediction_1")
-        ),
+      ),
       bslib::nav_panel(
-        title = "Manual Input",
-        mod_calculate_manual_input_prediction_ui("calculate_manual_input_prediction_1")),
-      bslib::nav_panel(title = "About", mod_about_ui("about_1")),
+        title = shiny::uiOutput("game_tab"),
+        mod_calculate_manual_input_prediction_ui("calculate_manual_input_prediction_1")
+      ),
+      bslib::nav_panel(title = shiny::uiOutput("about_tab"), mod_about_ui("about_1")),
       bslib::nav_item(
         shiny::selectInput(
           inputId = "selected_language",
