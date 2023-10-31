@@ -37,13 +37,12 @@ make_plot_from_location <- function(location, weight, abundance, cleaner){
 
 #' make_plot_for_cages_and_location
 #'
-#' @param location
-#' @param user_data
+#' @param location location
+#' @param user_data user data
 #'
-#' @return
-#' @export
+#' @return a plot object
 #'
-#' @examples
+#' @noRd
 make_plot_for_cages_and_location <- function(location, user_data){
 
   pressure <- extract_ip(location)
@@ -70,13 +69,12 @@ make_plot_for_cages_and_location <- function(location, user_data){
 
 #' make_plot_for_game
 #'
-#' @param location
-#' @param user_data
+#' @param location location
+#' @param user_data user data
 #'
-#' @return
-#' @export
+#' @return a plot object
 #'
-#' @examples
+#' @noRd
 make_plot_for_game <- function(ip1, ip2, st, user_data){
 
   user_data <- na.omit(user_data)
