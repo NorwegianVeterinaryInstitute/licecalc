@@ -88,7 +88,7 @@ mod_calculate_manual_input_prediction_server <- function(id, selected_language){
           scrollY = "200px"
         ),
         selection = "none",
-        editable = list(target = "row", disable = list(columns = 0)),
+        editable = list(target = "row", disable = list(columns = 0), area = c(1,2,3,4,5)),
         class = "cell-border stripe",
         caption = caption
       )

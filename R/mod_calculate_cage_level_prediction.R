@@ -183,7 +183,7 @@ mod_calculate_cage_level_prediction_server <-
               scrollY = "200px"
             ),
             selection = "none",
-            editable = list(target = "row", disable = list(columns = 0)),
+            editable = list(target = "row", disable = list(columns = 0), area = c(1,2,3,4,5)),
             server = FALSE,
             class = "cell-border stripe",
             caption = "Double click to edit cells. Ctr+Enter to save."
@@ -218,12 +218,12 @@ mod_calculate_cage_level_prediction_server <-
         entered_values <-
           as.numeric(input$manual_data_table_cell_edit$value[2:7])
 
-        if (!entered_values[[7]] %in% c(0, 1)) {
+        if (!entered_values[[6]] %in% c(0, 1)) {
           showModal(modalDialog(
-            title = "Error",
+            title = i8n()t("Error"),
             sprintf(
               "The %s column accepts only 0 (no), or 1 (yes)",
-              names(luse_demo_data)[[7]]
+              names(luse_demo_data)[[6]]
             )
           ))
           return(NULL)
@@ -236,9 +236,9 @@ mod_calculate_cage_level_prediction_server <-
       })
 
       # uncomment for debugging
-      # observeEvent(manual_data_rct(), {
-      #  print(manual_data_rct())
-      # })
+       observeEvent(manual_data_rct(), {
+        print(manual_data_rct())
+       })
 
       output$plot_cage <- shiny::renderPlot({
         if (input$additional_data == 2) {

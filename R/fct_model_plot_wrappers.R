@@ -54,11 +54,11 @@ make_plot_for_cages_and_location <- function(location, user_data, lang){
   prediction_object <- predict_lice(IP_1wk = pressure$IP_1wk,
                                     IP_2wk = pressure$IP_2wk,
                                     ST = pressure$ST,
-                                    AF = user_data$adult_females,
-                                    OM = user_data$other_motiles,
-                                    FX = user_data$sessiles,
-                                    W_SAL = user_data$fish_weight,
-                                    N_SAL = user_data$fish_abundance,
+                                    AF = conv_data(user_data$adult_females),
+                                    OM = conv_data(user_data$other_motiles),
+                                    FX = conv_data(user_data$sessiles),
+                                    W_SAL = conv_data(user_data$fish_weight),
+                                    N_SAL = conv_data(user_data$fish_abundance),
                                     CLF = user_data$cleaner_fish)
 
   p <- result_to_df(prediction_object) |>
@@ -86,11 +86,11 @@ make_plot_for_game <- function(ip1, ip2, st, user_data, lang){
   prediction_object <- predict_lice(IP_1wk = ip1,
                                     IP_2wk = ip2,
                                     ST = st,
-                                    AF = user_data$adult_females,
-                                    OM = user_data$other_motiles,
-                                    FX = user_data$sessiles,
-                                    W_SAL = user_data$fish_weight,
-                                    N_SAL = user_data$fish_abundance,
+                                    AF = conv_data(user_data$adult_females),
+                                    OM = conv_data(user_data$other_motiles),
+                                    FX = conv_data(user_data$sessiles),
+                                    W_SAL = conv_data(user_data$fish_weight),
+                                    N_SAL = conv_data(user_data$fish_abundance),
                                     CLF = user_data$cleaner_fish)
 
   p <- result_to_df(prediction_object) |>
