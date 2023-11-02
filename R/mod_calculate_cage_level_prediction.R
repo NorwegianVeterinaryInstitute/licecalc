@@ -220,7 +220,7 @@ mod_calculate_cage_level_prediction_server <-
 
         if (!entered_values[[6]] %in% c(0, 1)) {
           showModal(modalDialog(
-            title = i8n()t("Error"),
+            title = "Error",
             sprintf(
               "The %s column accepts only 0 (no), or 1 (yes)",
               names(luse_demo_data)[[6]]
