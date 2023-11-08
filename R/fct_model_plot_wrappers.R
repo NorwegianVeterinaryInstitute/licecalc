@@ -59,7 +59,7 @@ make_plot_for_cages_and_location <- function(location, user_data, lang){
                                     FX = conv_data(user_data$sessiles),
                                     W_SAL = conv_data(user_data$fish_weight),
                                     N_SAL = conv_data(user_data$fish_abundance),
-                                    CLF = as.logical(user_data$cleaner_fish))
+                                    CLF = as.logical(as.numeric(user_data$cleaner_fish)))
 
   p <- result_to_df(prediction_object) |>
     plot_prediction(location = location,
@@ -90,7 +90,7 @@ make_plot_for_game <- function(ip1, ip2, st, user_data, lang){
                                     FX = conv_data(user_data$sessiles),
                                     W_SAL = conv_data(user_data$fish_weight),
                                     N_SAL = conv_data(user_data$fish_abundance),
-                                    CLF = as.logical(user_data$cleaner_fish))
+                                    CLF = as.logical(as.numeric(user_data$cleaner_fish)))
 
   p <- result_to_df(prediction_object) |>
     plot_prediction(location = "game",

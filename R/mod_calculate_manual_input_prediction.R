@@ -150,10 +150,10 @@ mod_calculate_manual_input_prediction_server <- function(id, selected_language){
 
     manual_data_rct <- shiny::reactiveVal(empty)
 
-    observeEvent(input$manual_data_table_cell_edit, {
-      modified_row <-as.numeric(input$manual_data_table_cell_edit$value[1])
+    observeEvent(input$manual_data_table_game_cell_edit, {
+      modified_row <-as.numeric(input$manual_data_table_game_cell_edit$value[1])
       entered_values <-
-        input$manual_data_table_cell_edit$value[2:7]
+        input$manual_data_table_game_cell_edit$value[2:7]
 
       if (!entered_values[[6]] %in% c(0, 1)) {
         showModal(modalDialog(
