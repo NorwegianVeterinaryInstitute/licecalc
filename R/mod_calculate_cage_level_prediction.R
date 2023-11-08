@@ -16,7 +16,7 @@ mod_calculate_cage_level_prediction_ui <- function(id) {
     bslib::card(
       bslib::card_header(shiny::uiOutput(ns("card_title_plot"))),
       bslib::card_body(
-    shiny::plotOutput(ns("plot_cage"), height = '1200px'))
+    shiny::plotOutput(ns("plot_cage")))
   )))
 }
 
@@ -216,7 +216,7 @@ mod_calculate_cage_level_prediction_server <-
       observeEvent(input$manual_data_table_cell_edit, {
         modified_row <-as.numeric(input$manual_data_table_cell_edit$value[1])
         entered_values <-
-          as.numeric(input$manual_data_table_cell_edit$value[2:7])
+          input$manual_data_table_cell_edit$value[2:7]
 
         if (!entered_values[[6]] %in% c(0, 1)) {
           showModal(modalDialog(
@@ -242,6 +242,8 @@ mod_calculate_cage_level_prediction_server <-
 
       output$plot_cage <- shiny::renderPlot({
         if (input$additional_data == 2) {
+          print(input$additional_data)
+          browser()
           tryCatch(
             expr = {
               make_plot_for_cages_and_location(location = input$locality_number,

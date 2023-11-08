@@ -148,7 +148,37 @@ mod_calculate_manual_input_prediction_server <- function(id, selected_language){
     )
 
 
-    output$plot_cage <- shiny::renderPlot(
+    manual_data_rct <- shiny::reactiveVal(empty)
+
+    observeEvent(input$manual_data_table_cell_edit, {
+      modified_row <-as.numeric(input$manual_data_table_cell_edit$value[1])
+      entered_values <-
+        input$manual_data_table_cell_edit$value[2:7]
+
+      if (!entered_values[[6]] %in% c(0, 1)) {
+        showModal(modalDialog(
+          title = "Error",
+          sprintf(
+            "The %s column accepts only 0 (no), or 1 (yes)",
+            names(luse_demo_data)[[6]]
+          )
+        ))
+        return(NULL)
+      }
+
+      current_manual_data <- manual_data_rct()
+      current_manual_data[modified_row, ] <- entered_values
+      names(current_manual_data) <- names(luse_demo_data)
+      manual_data_rct(current_manual_data)
+    })
+
+    # uncomment for debugging
+    observeEvent(manual_data_rct(), {
+      print(manual_data_rct())
+    })
+
+
+    output$plot_cage_game <- shiny::renderPlot(
       {
         tryCatch(
           expr = {
