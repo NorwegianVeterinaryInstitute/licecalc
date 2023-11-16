@@ -243,7 +243,6 @@ mod_calculate_cage_level_prediction_server <-
       output$plot_cage <- shiny::renderPlot({
         if (input$additional_data == 2) {
           print(input$additional_data)
-          browser()
           tryCatch(
             expr = {
               make_plot_for_cages_and_location(location = input$locality_number,

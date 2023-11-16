@@ -110,8 +110,9 @@ plot_prediction <-
           y = "Lice per Fish"
         ) +
         ggplot2::scale_x_discrete(labels = c(1, 2, 1, 2, 1, 2)) +
-        ggplot2::scale_color_discrete(name = "",
-                                      labels = c("Sessile", "Motile", "Female"))
+        ggplot2::scale_color_manual(name = "",
+                                      labels = c("Sessile", "Motile", "Female"),
+                                      values = c("#6fb2d3", "#579e65", "#c4796d"))
     }
 
     if (lang == 'nb') {
