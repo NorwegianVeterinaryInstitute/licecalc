@@ -13,11 +13,17 @@ mod_calculate_farm_level_prediction_ui <- function(id){
   ns <- NS(id)
 
   tagList(
-    bslib::layout_sidebar(
-      sidebar = bslib::sidebar(
+    div(
+      class = "d-flex flex-row p-2",
+      style = "gap: 1rem;",
+      div(
+        class = "col-3 bg-light border rounded shadow-sm p-3",
     shiny::uiOutput(ns('sidebar_farm'))
   ),
-    shiny::plotOutput(ns("plot_farm"))
+  div(
+    class = "col-9 border rounded shadow-sm p-2",
+    h5("Model results"),
+    shiny::plotOutput(ns("plot_farm")))
   ))
 }
 
