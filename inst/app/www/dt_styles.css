@@ -1,0 +1,6 @@
+.table> :not(caption)>*>*, 
+table.dataTable tbody th,
+table.dataTable tbody td {
+    padding: 0.25rem;
+}
+
