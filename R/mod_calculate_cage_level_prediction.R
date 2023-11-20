@@ -9,15 +9,19 @@
 #' @importFrom shiny NS tagList
 mod_calculate_cage_level_prediction_ui <- function(id) {
   ns <- NS(id)
-  tagList(bslib::layout_sidebar(
-    sidebar = bslib::sidebar(shiny::uiOutput(ns('sidebar_cage'))),
-
-    shiny::uiOutput(ns("manual_data_card")),
-    bslib::card(
-      bslib::card_header(shiny::uiOutput(ns("card_title_plot"))),
-      bslib::card_body(
-    shiny::plotOutput(ns("plot_cage")))
-  )))
+  tagList(
+    div(
+    class = "d-flex flex-row p-2",
+    style = "gap: 1rem;",
+    div(class = "col-4 bg-light border rounded shadow-sm p-3",
+        shiny::uiOutput(ns('sidebar_cage'))
+        ),
+    div(class = "col-8 border rounded shadow-sm p-2",
+        h5(
+          shiny::uiOutput(ns("card_title_plot"))),
+          shiny::plotOutput(ns("plot_cage"))
+        ))
+  )
 }
 
 #' calculate_cage_level_prediction Server Functions
@@ -67,6 +71,7 @@ mod_calculate_cage_level_prediction_server <-
               class = "btn-primary main-button"
             )
           ),
+          shiny::uiOutput(ns("manual_data_card")),
           shiny::actionButton(
             inputId = ns("predict"),
             label = i18n()$t("Predict")
@@ -118,22 +123,21 @@ mod_calculate_cage_level_prediction_server <-
                     {
                       if (input$additional_data == 2) {
                         if (i18n()$get_translation_language() == 'en') {
-                          ui <- bslib::card(
-                            bslib::card_header(
+                          ui <- shiny::tagList(shiny::helpText(
                               "Enter data in cells bellow. Check the demodata file for guidance."
                             ),
-                            bslib::card_body(DT::dataTableOutput(ns(
+                            DT::dataTableOutput(ns(
                               "manual_data_table"
-                            ), ))
+                            ), )
                           )
                         } else {
-                          ui <- bslib::card(
-                            bslib::card_header(
+                          ui <- shiny::tagList(shiny::helpText(
+
                               "Skriv inn data i cellene nedenfor. Sjekk demodatafilen for veiledning."
                             ),
-                            bslib::card_body(DT::dataTableOutput(ns(
+                            DT::dataTableOutput(ns(
                               "manual_data_table"
-                            ), ))
+                            ), )
                           )
                         }
 
@@ -175,34 +179,60 @@ mod_calculate_cage_level_prediction_server <-
           if(i18n()$get_translation_language() == 'en') {
 
           output$manual_data_table <- DT::renderDataTable(
-            empty,
-            # empty data frame, see data-raw for more.
-            options = list(
-              pageLength = 20,
-              dom = "t",
-              scrollY = "200px"
-            ),
-            selection = "none",
-            editable = list(target = "row", disable = list(columns = 0), area = c(1,2,3,4,5)),
-            server = FALSE,
-            class = "cell-border stripe",
-            caption = "Double click to edit cells. Ctr+Enter to save."
-          ) } else {
 
-            output$manual_data_table <- DT::renderDataTable(
-              empty_nb,
+            DT::datatable(
+              empty,
               # empty data frame, see data-raw for more.
               options = list(
                 pageLength = 20,
                 dom = "t",
-                scrollY = "200px"
+                # scrollY = "400px",
+                autowidth = FALSE,
+                columnDefs = list(
+                  list(width = "25px", targets = 0),
+                  list(width = "25px", targets = c(1:6))
+                ),
+                ordering = FALSE
               ),
               selection = "none",
-              editable = list(target = "row", disable = list(columns = 0)),
-              server = FALSE,
-              class = "cell-border stripe",
-              caption = "Dobbeltklikk for å redigere celler. Ctr+Enter for å lagre."
-            )
+              editable = list(
+                target = "row",
+                disable = list(columns = 0),
+                area = c(1, 2, 3, 4, 5)
+              ),
+              class = "cell-border compact stripe",
+              caption = "Double click to edit cells. Ctr+Enter to save.",
+              style = "bootstrap5"
+            ))
+
+    } else {
+
+            output$manual_data_table <- DT::renderDataTable(
+
+              DT::datatable(
+                empty_nb,
+                # empty data frame, see data-raw for more.
+                options = list(
+                  pageLength = 20,
+                  dom = "t",
+                  # scrollY = "400px",
+                  autowidth = FALSE,
+                  columnDefs = list(
+                    list(width = "25px", targets = 0),
+                    list(width = "25px", targets = c(1:6))
+                  ),
+                  ordering = FALSE
+                ),
+                selection = "none",
+                editable = list(
+                  target = "row",
+                  disable = list(columns = 0),
+                  area = c(1, 2, 3, 4, 5)
+                ),
+                class = "cell-border compact stripe",
+                caption = "Dobbeltklikk for å redigere celler. Ctr+Enter for å lagre.",
+                style = "bootstrap5"
+            ))
 
           }
 
