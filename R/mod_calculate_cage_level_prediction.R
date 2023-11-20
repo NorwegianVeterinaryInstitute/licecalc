@@ -176,12 +176,17 @@ mod_calculate_cage_level_prediction_server <-
 
       observeEvent(input$additional_data, {
         if (input$additional_data == 2) {
-          if(i18n()$get_translation_language() == 'en') {
-
+          if (i18n()$get_translation_language() == 'en') {
+            dat <- empty
+            caption = "Double click to edit cells. Ctr+Enter to save."
+          } else {
+            dat = empty_nb
+            caption = "Dobbeltklikk for å redigere celler. Ctr+Enter for å lagre."
+          }
           output$manual_data_table <- DT::renderDataTable(
 
             DT::datatable(
-              empty,
+              dat,
               # empty data frame, see data-raw for more.
               options = list(
                 pageLength = 20,
@@ -201,45 +206,12 @@ mod_calculate_cage_level_prediction_server <-
                 area = c(1, 2, 3, 4, 5)
               ),
               class = "cell-border compact stripe",
-              caption = "Double click to edit cells. Ctr+Enter to save.",
+              caption = caption,
               style = "bootstrap5"
-            ))
+            ), server = FALSE)
 
-    } else {
+    } })
 
-            output$manual_data_table <- DT::renderDataTable(
-
-              DT::datatable(
-                empty_nb,
-                # empty data frame, see data-raw for more.
-                options = list(
-                  pageLength = 20,
-                  dom = "t",
-                  # scrollY = "400px",
-                  autowidth = FALSE,
-                  columnDefs = list(
-                    list(width = "25px", targets = 0),
-                    list(width = "25px", targets = c(1:6))
-                  ),
-                  ordering = FALSE
-                ),
-                selection = "none",
-                editable = list(
-                  target = "row",
-                  disable = list(columns = 0),
-                  area = c(1, 2, 3, 4, 5)
-                ),
-                class = "cell-border compact stripe",
-                caption = "Dobbeltklikk for å redigere celler. Ctr+Enter for å lagre.",
-                style = "bootstrap5"
-            ))
-
-          }
-
-
-
-        }
-      })
 
       manual_data_rct <- shiny::reactiveVal(empty)
 
