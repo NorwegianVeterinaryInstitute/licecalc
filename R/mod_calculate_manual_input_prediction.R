@@ -138,13 +138,24 @@ mod_calculate_manual_input_prediction_server <- function(id, selected_language){
         input$manual_data_table_game_cell_edit$value[2:7]
 
       if (!entered_values[[6]] %in% c(0, 1)) {
-        showModal(modalDialog(
-          title = "Error",
-          sprintf(
-            "The %s column accepts only 0 (no), or 1 (yes)",
-            names(luse_demo_data)[[6]]
-          )
-        ))
+        showModal(
+          if (i18n()$get_translation_language() == 'en') {
+            modalDialog(
+              title = "Error",
+              sprintf(
+                "The %s column accepts only 0 (no), or 1 (yes)",
+                names(empty)[[6]]
+              )
+            )} else {
+              modalDialog(
+                title = "Feil",
+                sprintf(
+                  "%s kolonnen godtar bare 0 (nei) eller 1 (ja)",
+                  names(empty_nb)[[6]]
+                )
+              )
+            }
+        )
         return(NULL)
       }
 
@@ -155,9 +166,9 @@ mod_calculate_manual_input_prediction_server <- function(id, selected_language){
     })
 
     # uncomment for debugging
-    observeEvent(manual_data_rct(), {
-      print(manual_data_rct())
-    })
+    # observeEvent(manual_data_rct(), {
+    #  print(manual_data_rct())
+    # })
 
 
     output$plot_cage_game <- shiny::renderPlot({
@@ -173,10 +184,18 @@ mod_calculate_manual_input_prediction_server <- function(id, selected_language){
         },
         error = function(e) {
           showModal(
-            modalDialog(
-              title = "Error",
-              "The locality was found, but we could not generate predictions."
-            )
+
+            if (i18n()$get_translation_language() == 'en') {
+              modalDialog(title = "Error",
+                          "The locality was found, but we could not generate predictions.",
+                          footer = modalButton("Dismiss"))
+            }  else {
+              modalDialog(title = "Feil",
+                          "Lokaliteten ble funnet, men vi kunne ikke generere spådommer.",
+                          footer = modalButton("Avskjedige"))
+
+            }
+
           )
         }
       )

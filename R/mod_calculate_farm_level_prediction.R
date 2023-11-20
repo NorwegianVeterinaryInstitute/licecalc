@@ -22,7 +22,7 @@ mod_calculate_farm_level_prediction_ui <- function(id){
   ),
   div(
     class = "col-9 border rounded shadow-sm p-2",
-    h5("Model results"),
+    h5(shiny::uiOutput(ns("card_title_plot"))),
     shiny::plotOutput(ns("plot_farm")))
   ))
 }
@@ -70,6 +70,26 @@ mod_calculate_farm_level_prediction_server <- function(id, selected_language){
 
     })
 
+    card_title_ui <- reactive({
+      if (i18n()$get_translation_language() == 'en') {
+        ui <-
+          shiny::renderText(
+            "Prediction per farm"
+          )
+      } else {
+        ui <-
+          shiny::renderText(
+            "Prediksjon per gård"
+          )
+      }})
+
+
+    output$card_title_plot <- shiny::renderUI(
+      {
+        card_title_ui()
+      }
+    )
+
     output$plot_farm <- shiny::renderPlot(
       {
         tryCatch(
@@ -82,10 +102,18 @@ mod_calculate_farm_level_prediction_server <- function(id, selected_language){
           },
         error = function(e) {
           showModal(
-            modalDialog(
-              title = "Error",
-              "The locality was found, but we could not generate predictions."
-            )
+
+            if (i18n()$get_translation_language() == 'en') {
+              modalDialog(title = "Error",
+                          "The locality was found, but we could not generate predictions.",
+                          footer = modalButton("Dismiss"))
+            }  else {
+              modalDialog(title = "Feil",
+                          "Lokaliteten ble funnet, men vi kunne ikke generere spådommer.",
+                          footer = modalButton("Avskjedige"))
+
+            }
+
           )
         }
         )

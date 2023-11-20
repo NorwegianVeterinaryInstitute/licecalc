@@ -65,7 +65,7 @@ mod_calculate_cage_level_prediction_server <-
           ),
           shiny::p(
             shiny::a(
-              shiny::span(shiny::icon("download"), "Download example csv"),
+              shiny::span(shiny::icon("download"), i18n()$t("Download example csv")),
               href = "/www/lusedata.csv",
               target = "blank",
               class = "btn-primary main-button"
@@ -249,13 +249,26 @@ mod_calculate_cage_level_prediction_server <-
           input$manual_data_table_cell_edit$value[2:7]
 
         if (!entered_values[[6]] %in% c(0, 1)) {
-          showModal(modalDialog(
+          showModal(
+
+            if (i18n()$get_translation_language() == 'en') {
+            modalDialog(
             title = "Error",
             sprintf(
               "The %s column accepts only 0 (no), or 1 (yes)",
               names(luse_demo_data)[[6]]
             )
-          ))
+            )} else {
+              modalDialog(
+                title = "Feil",
+                sprintf(
+                  "%s kolonnen godtar bare 0 (nei) eller 1 (ja)",
+                  names(luse_demo_data)[[6]]
+                )
+              )
+          }
+
+          )
           return(NULL)
         }
 
@@ -266,9 +279,9 @@ mod_calculate_cage_level_prediction_server <-
       })
 
       # uncomment for debugging
-       observeEvent(manual_data_rct(), {
-        print(manual_data_rct())
-       })
+      # observeEvent(manual_data_rct(), {
+      #  print(manual_data_rct())
+      # })
 
       output$plot_cage <- shiny::renderPlot({
         if (input$additional_data == 2) {
@@ -281,10 +294,18 @@ mod_calculate_cage_level_prediction_server <-
             },
             error = function(e) {
               showModal(
-                modalDialog(
-                  title = "Error",
-                  "The locality was found, but we could not generate predictions."
-                )
+
+                if (i18n()$get_translation_language() == 'en') {
+                  modalDialog(title = "Error",
+                              "The locality was found, but we could not generate predictions.",
+                              footer = modalButton("Dismiss"))
+                }  else {
+                  modalDialog(title = "Feil",
+                              "Lokaliteten ble funnet, men vi kunne ikke generere spådommer.",
+                              footer = modalButton("Avskjedige"))
+
+                }
+
               )
             }
           )
@@ -299,10 +320,18 @@ mod_calculate_cage_level_prediction_server <-
 
             error = function(e) {
               showModal(
-                modalDialog(
-                  title = "Error",
-                  "The locality was found, but we could not generate predictions."
-                )
+
+                if (i18n()$get_translation_language() == 'en') {
+                  modalDialog(title = "Error",
+                              "The locality was found, but we could not generate predictions.",
+                              footer = modalButton("Dismiss"))
+                }  else {
+                  modalDialog(title = "Feil",
+                              "Lokaliteten ble funnet, men vi kunne ikke generere spådommer.",
+                              footer = modalButton("Avskjedige"))
+
+                }
+
               )
             }
           )

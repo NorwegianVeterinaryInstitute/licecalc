@@ -54,8 +54,8 @@
       "nb": "Merddata for ditt anlegg"
     },
     {
-      "en": "Upload table in csv format (download example.csv)",
-      "nb": "Last opp tabell i csv-format (last ned eksempel.csv)"
+      "en": "Upload table in csv format",
+      "nb": "Last opp tabell i csv-format"
     },
     {
       "en": "Enter data manually",
@@ -132,6 +132,14 @@
     {
       "en": "Prediction per cage",
       "nb": "Prediksjon per bur"
+    },
+    {
+      "en": "Download example csv",
+      "nb": "Last ned eksempel csv"
+    },
+    {
+      "en": "Prediction per farm",
+      "nb": "Prediksjon per gård"
     }
   ]
 }
