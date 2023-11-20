@@ -140,6 +140,15 @@
     {
       "en": "Prediction per farm",
       "nb": "Prediksjon per gård"
+    },
+    {
+      "en": "Infectious pressure first week",
+      "nb": "Infeksiøst trykk første uke"
+    },
+    {
+      "en": "Infectious pressure second week",
+      "nb": "Infeksiøst trykk andre uke"
     }
   ]
 }
+
