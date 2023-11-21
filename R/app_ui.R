@@ -11,18 +11,57 @@ app_ui <- function(request) {
   tagList(
     # Leave this function for adding external resources
     golem_add_external_resources(),
+    shiny.i18n::usei18n(i18n),
 
     # Your application UI logic
-    bslib::page_fluid(theme = bslib::bs_theme(bootswatch = "flatly", version = 5, font_scale = 0.8),
-    shiny.i18n::usei18n(i18n),
-    tags$header(div(class = "d-flex flex-row justify-content-between header-container align-items-center",
-    img(class = "header-left", src = "www/vet-rgb-2.svg"),
-    div(class = "header-middle", i18n$t("Lice Calculator")),
-    div(class = "header-right", shiny::actionLink(inputId = "docs", label = i18n$t("About the calculator")))
-)),
+    bslib::page_navbar(
+      theme = bslib::bs_theme(
+        bootswatch = "zephyr",
+        version = 5,
+        font_scale = 0.8,
+        base_font = bslib::font_face(
+          family = "Futura PT",
+          style = "Medium",
+          src = "www/Futura PT Medium.ttf"
+        )
+      ),
+      inverse = FALSE,
 
-    #mod_plot_lice_ui("plot_lice_1")
-    mod_lice_model_v2_ui("lice_model_v2_1")
+      bslib::nav_item(
+        shiny::tags$a(
+          style = "padding: 0;",
+          shiny::img(src = "www/vet-rgb-2.svg", height = "40px"),
+          href = "https://www.vetinst.no/",
+          target = "_blank"
+        )
+      ),
+      bslib::nav_spacer(),
+      bslib::nav_item(shiny::uiOutput("app_title")),
+
+      bslib::nav_spacer(),
+      bslib::nav_panel(title = shiny::uiOutput("home_tab"), mod_home_ui("home_1")),
+      bslib::nav_panel(
+        title = shiny::uiOutput("farm_tab"),
+        mod_calculate_farm_level_prediction_ui("calculate_farm_level_prediction_1")
+      ),
+      bslib::nav_panel(
+        title = shiny::uiOutput("cage_tab"),
+        mod_calculate_cage_level_prediction_ui("calculate_cage_level_prediction_1")
+      ),
+      bslib::nav_panel(
+        title = shiny::uiOutput("game_tab"),
+        mod_calculate_manual_input_prediction_ui("calculate_manual_input_prediction_1")
+      ),
+      bslib::nav_panel(title = shiny::uiOutput("about_tab"), mod_about_ui("about_1")),
+      bslib::nav_item(
+        shiny::selectInput(
+          inputId = "selected_language",
+          label = NULL,
+          choices = c("en", "nb"),
+          width = '75px'
+        )
+      ),
+
     )
   )
 }
@@ -36,18 +75,13 @@ app_ui <- function(request) {
 #' @importFrom golem add_resource_path activate_js favicon bundle_resources
 #' @noRd
 golem_add_external_resources <- function() {
-  add_resource_path(
-    "www",
-    app_sys("app/www")
-  )
+  add_resource_path("www",
+                    app_sys("app/www"))
 
-  tags$head(
-    favicon(),
-    bundle_resources(
-      path = app_sys("app/www"),
-      app_title = "licecalc"
-    )
-    # Add here other external resources
-    # for example, you can add shinyalert::useShinyalert()
-  )
+  tags$head(favicon(),
+            bundle_resources(path = app_sys("app/www"),
+                             app_title = "licecalc")
+            # Add here other external resources
+            # for example, you can add shinyalert::useShinyalert()
+      )
 }

@@ -54,8 +54,8 @@
       "nb": "Merddata for ditt anlegg"
     },
     {
-      "en": "Upload table in csv format (download example.csv)",
-      "nb": "Last opp tabell i csv-format (last ned eksempel.csv)"
+      "en": "Upload table in csv format",
+      "nb": "Last opp tabell i csv-format"
     },
     {
       "en": "Enter data manually",
@@ -80,6 +80,75 @@
     {
       "en": "Lice Calculator",
       "nb": "Lusekalkulator"
+    },
+    {
+      "en": "Home",
+      "nb": "Hjem"
+    },
+    {
+      "en": "About",
+      "nb": "Om"
+    },
+    {
+      "en": "Farm Prediction",
+      "nb": "Gårdsprediksjon"
+    },
+    {
+      "en": "Cage Prediction",
+      "nb": "Prediksjon av bur"
+    },
+    {
+      "en": "Manual Input",
+      "nb": "Manuell inntasting"
+    },
+    {
+      "en": "Fish weight",
+      "nb": "Fiskevekt"
+    },
+    {
+      "en": "Fish abundance",
+      "nb": "Fiskeoverflod"
+    },
+    {
+      "en": "Presence of cleaner fish",
+      "nb": "Tilstedeværelse av rensefisk"
+    },
+    {
+      "en": "Predict",
+      "nb": "Forutsi"
+    },
+    {
+      "en": "Infectious presure first week",
+      "nb": "Infeksiøst trykk første uke"
+    },
+    {
+      "en": "Infectious presure second week",
+      "nb": "Infeksiøst trykk andre uke"
+    },
+    {
+      "en": "Sea temperature",
+      "nb": "Sjøtemperatur"
+    },
+    {
+      "en": "Prediction per cage",
+      "nb": "Prediksjon per bur"
+    },
+    {
+      "en": "Download example csv",
+      "nb": "Last ned eksempel csv"
+    },
+    {
+      "en": "Prediction per farm",
+      "nb": "Prediksjon per gård"
+    },
+    {
+      "en": "Infectious pressure first week",
+      "nb": "Infeksiøst trykk første uke"
+    },
+    {
+      "en": "Infectious pressure second week",
+      "nb": "Infeksiøst trykk andre uke"
     }
   ]
 }
+

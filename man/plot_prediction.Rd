@@ -5,7 +5,13 @@
 \title{plot_predition
 A function to generate plot from the predicted data.}
 \usage{
-plot_prediction(prediction_df, log = TRUE, lang = "en")
+plot_prediction(
+  prediction_df,
+  log = TRUE,
+  lang = "en",
+  location = NULL,
+  week_number = NULL
+)
 }
 \arguments{
 \item{prediction_df}{a dataframe returned by `restult_to_df`}
@@ -13,6 +19,8 @@ plot_prediction(prediction_df, log = TRUE, lang = "en")
 \item{log}{flag for converting the data to log scale. `TRUE` by default}
 
 \item{lang}{the language for the plot. Can be `en` or `nb` only.}
+
+\item{location}{the number of the farm location.}
 }
 \value{
 a ggplot2 object
