@@ -15,6 +15,7 @@ Imports:
     ggplot2,
     golem (>= 0.4.1),
     markdown,
+    pkgload,
     shiny (>= 1.7.4),
     shiny.i18n,
     tibble,
