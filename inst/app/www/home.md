@@ -4,6 +4,6 @@ The calculator predicts the number of salmon lice in different developmental sta
 
 Input data that have to be entered manually are fish weight (kg), fish abundance (1000s) and presence or absence of cleaner fish. 
 
-The following input data can be obtained automatically by entering the 5-digit locality number of the fish farm: this week’s lice counts and sea temperature reported to the Norwegian Food Safety Authority.
+The following input data can be obtained automatically by entering the 5-digit locality number of the fish farm: this week’s lice counts and sea temperature reported to the Norwegian Food Safety Authority, and infestation pressure – a proxy for the concentration of infective salmon lice larvae in the sea.
 
 The salmon lice calculator is developed as part of the NewTechAqua project with support from the European Union’s Horizon 2020 Programme under grant agreement No 862658. 
