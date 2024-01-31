@@ -79,7 +79,9 @@ mod_calculate_manual_input_prediction_server <-
             inputId = ns("predict"),
             label = i18n()$t("Predict")
           ),
-          shiny::helpText("Bla bla bla")
+          shiny::br(),
+          shiny::helpText( i18n()$t(
+            "Click here to predict 1 and 2 weeks ahead. Circles will show the expected number of salmon lice of different stages per fish. The broad bands will show  90% prediction intervals for the true lice abundance. Thin bands will show 90% prediction intervals for lice counts, assuming lice are counted on 20 fish in each cage."))
         )
       })
 

@@ -148,7 +148,23 @@
     {
       "en": "Infectious pressure second week",
       "nb": "Infeksiøst trykk andre uke"
+    },
+    { "en": "Click here to predict 1 and 2 weeks ahead. Circles will show the expected number of salmon lice of different stages per fish. The broad bands will show  90% prediction intervals for the true lice abundance. Thin bands will show 90% prediction intervals for lice counts, assuming lice are counted on 20 fish in each cage.",
+      "nb": "Klikk her for å forutsi 1 og 2 uker fremover. Sirkler vil vise forventet antall lakselus av ulike stadier per fisk. De brede båndene vil vise 90% prediksjonsintervaller for den sanne lusemengden. Tynne bånd vil vise 90% prediksjonsintervaller for lusetall, forutsatt at det telles lus på 20 fisk i hver merd."
+    },
+    {
+      "en": "Enter 5-digit code to obtain this week’s lice counts and sea temperature automatically.",
+      "nb": "Skriv inn 5-sifret kode for å få denne ukens lusetall og sjøtemperatur automatisk."
+    },
+    {
+      "en": "Enter mean fish weight (kg)",
+      "nb": "Angi gjennomsnittlig fiskevekt (kg)"
+    },
+    {
+      "en": "Enter number of fish (thousands)",
+      "nb": "Skriv inn antall fisk (tusenvis)"
     }
+    
   ]
 }
 

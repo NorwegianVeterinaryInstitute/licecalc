@@ -46,16 +46,29 @@ mod_calculate_farm_level_prediction_server <- function(id, selected_language){
         label = i18n()$t("Locality Number"),
         value = NULL
       ),
+      shiny::helpText(i18n()$t(
+        "Enter 5-digit code to obtain this week’s lice counts and sea temperature automatically."
+      )),
+      shiny::br(),
+      shiny::br(),
       shiny::textInput(
         ns("fish_weight_farm"),
         label = i18n()$t("Fish weight"),
         value = "2,2"
       ),
+      shiny::helpText(i18n()$t("Enter mean fish weight (kg)")
+      ),
+      shiny::br(),
+      shiny::br(),
       shiny::textInput(
         ns("fish_abundance_farm"),
         label = i18n()$t("Fish abundance"),
         value = "130"
       ),
+      shiny::helpText(i18n()$t("Enter number of fish (thousands)")
+      ),
+      shiny::br(),
+      shiny::br(),
       shiny::checkboxInput(
         ns("cleaner_fish_farm"),
         label = i18n()$t("Presence of cleaner fish"),
@@ -65,8 +78,8 @@ mod_calculate_farm_level_prediction_server <- function(id, selected_language){
         inputId = ns("predict"),
         label = i18n()$t("Predict")
       ),
-      shiny::helpText("
-                    Bla bla bla"))
+      shiny::br(),
+      shiny::helpText(i18n()$t("Click here to predict 1 and 2 weeks ahead. Circles will show the expected number of salmon lice of different stages per fish. The broad bands will show  90% prediction intervals for the true lice abundance. Thin bands will show 90% prediction intervals for lice counts, assuming lice are counted on 20 fish in each cage.")))
 
     })
 

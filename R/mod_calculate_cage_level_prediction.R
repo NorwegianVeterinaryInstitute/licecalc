@@ -43,6 +43,10 @@ mod_calculate_cage_level_prediction_server <-
             label = i18n()$t("Locality Number"),
             value = NULL
           ),
+          shiny::helpText("Enter 5-digit code to obtain this week’s 
+                          lice counts and sea temperature automatically."),
+          shiny::br(),
+          shiny::br(),
           shiny::radioButtons(
             inputId = ns("additional_data"),
             label = i18n()$t("Additional data for your farm"),
@@ -76,23 +80,26 @@ mod_calculate_cage_level_prediction_server <-
             inputId = ns("predict"),
             label = i18n()$t("Predict")
           ),
-          shiny::helpText("Bla bla bla")
+          shiny::br(),
+          shiny::helpText(i18n()$t("Click here to predict 1 and 2 weeks ahead. Circles will show the expected number of salmon lice of different stages per fish. The broad bands will show  90% prediction intervals for the true lice abundance. Thin bands will show 90% prediction intervals for lice counts, assuming lice are counted on 20 fish in each cage."))
         )
       })
-
+      
       observe({
-        choices_radio_1 <- setNames(1:2, i18n()$t(
-          c(
-            "Enter the 5-digit locality number and get infection pressure automatically",
-            "Select infection pressure manually"
-          )
-        ))
-        updateRadioButtons(
-          session,
-          "infectious_pressure",
-          label = i18n()$t("Infectious Pressure"),
-          choices = choices_radio_1
-        )
+      #### THIS IS OBSOLETE CODE 
+      #     choices_radio_1 <- setNames(1:2, i18n()$t(
+      #     c(
+      #       "Enter the 5-digit locality number and get infection pressure automatically",
+      #       "Select infection pressure manually"
+      #     )
+      #   ))
+      #   updateRadioButtons(
+      #     session,
+      #     "infectious_pressure",
+      #     label = i18n()$t("Infectious Pressure"),
+      #     choices = choices_radio_1
+      #   )
+      ####
         choices_radio_3 <- setNames(1:2, i18n()$t(c(
           "Upload table in csv format",
           "Enter data manually"
