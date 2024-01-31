@@ -43,9 +43,9 @@ mod_calculate_manual_input_prediction_server <-
                 inputId = ns("infectious_pressure_manually_1week"),
                 label = i18n()$t("Infectious pressure first week"),
                 min = 0,
-                max = 22,
-                step = 1,
-                value = 15,
+                max = 300000,
+                step = 2000,
+                value = 100000,
                 width = "75%"
               )
             ),
@@ -55,9 +55,9 @@ mod_calculate_manual_input_prediction_server <-
                 inputId = ns("infectious_pressure_manually_2week"),
                 label = i18n()$t("Infectious pressure second week"),
                 min = 0,
-                max = 22,
-                step = 1,
-                value = 15,
+                max = 300000,
+                step = 2000,
+                value = 100000,
                 width = "75%"
               )
             ),
@@ -66,10 +66,10 @@ mod_calculate_manual_input_prediction_server <-
               shiny::numericInput(
                 inputId = ns("sea_temperature_manually"),
                 label = i18n()$t("Sea temperature"),
-                min = 0,
-                max = 22,
+                min = 3,
+                max = 18,
                 step = 1,
-                value = 15,
+                value = 9,
                 width = "75%"
               )
             )
