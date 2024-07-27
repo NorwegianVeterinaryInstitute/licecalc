@@ -19,4 +19,4 @@ The goal of licecalc is to …
 
 ## Deploy to Connect 
 
-App is deployed to Connect using the code in the `dev/03_deploy.R script`. The package `licecalc` has to be installed first from github with `remotes::install_github("NorwegianVeterinaryInstitute/licecalc")`.
+App is deployed automatically to Connect.
